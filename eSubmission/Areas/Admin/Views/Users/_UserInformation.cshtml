@@ -1,0 +1,54 @@
+﻿@model eSubmission.Areas.Admin.Models.UserDetailViewModel
+@using eSubmission.Areas.Admin.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<UsersController> HtmlLocalizer
+
+@{
+    var userNameLabel = String.Format(@HtmlLocalizer["UserNameLabel"].Value);
+    var fullNameLabel = String.Format(@HtmlLocalizer["FullNameLabel"].Value);
+    var emailLabel = String.Format(@HtmlLocalizer["EmailLabel"].Value);
+    var phoneLabel = String.Format(@HtmlLocalizer["PhoneLabel"].Value);
+}
+
+<div class="style-left" style="margin-bottom:15px; padding: 20px">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @(Html.DevExtreme().TextBox()
+                    .Label(userNameLabel).LabelMode(EditorLabelMode.Floating)
+                    .Value(Model.UserName)
+                    .Name("UserName")
+                    .MaxLength(50).ShowClearButton(true))
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @(Html.DevExtreme().TextBox()
+                    .Label(fullNameLabel).LabelMode(EditorLabelMode.Floating)
+                    .Value(Model.FullName)
+                    .Name("FullName")
+                    .MaxLength(50).ShowClearButton(true))
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @(Html.DevExtreme().TextBox()
+                    .Label(emailLabel).LabelMode(EditorLabelMode.Floating)
+                    .Value(Model.Email)
+                    .Name("Email")
+                    .MaxLength(50).ShowClearButton(true))
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @(Html.DevExtreme().TextBox()
+                    .Label(phoneLabel).LabelMode(EditorLabelMode.Floating)
+                    .Value(Model.Phone)
+                    .Name("Phone")
+                    .MaxLength(50).ShowClearButton(true))
+            </div>
+        </div>
+    </div>
+</div>
+

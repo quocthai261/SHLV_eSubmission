@@ -1,0 +1,104 @@
+﻿
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">
+        Hồ sơ yêu cầu bảo hiểm
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <strong>Thông tin hợp đồng tín dụng</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar six-step">
+                <li class="active" onclick="onProgressBarClicked('PolicyOwner')">Bên mua bảo hiểm</li>
+                <li class="active" onclick="onProgressBarClicked('LifeAssurance')">Người được bảo hiểm</li>
+                <li class="active" onclick="onProgressBarClicked('PolicyInformation')">Thông tin hợp đồng tín dụng</li>
+                <li onclick="onProgressBarClicked('BeneficiaryInformation')">Thông tin người thụ hưởng</li>
+                <li onclick="onProgressBarClicked('AddressContact')">Địa chỉ liên hệ</li>
+                <li onclick="onProgressBarClicked('Agreement')">Cam kết của BMBH</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('LifeAssurance')"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('BeneficiaryInformation')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Thông tin hợp đồng vay</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Hợp đồng tín dụng số").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DateBox()
+                                    .Type(DateBoxType.Date)
+                                    .DisplayFormat("dd/MM/yyyy")
+                                    .UseMaskBehavior(true)
+                                    .Placeholder("dd/mm/yyyy")
+                                    .Label("Ngày ký hợp đồng tín dụng").LabelMode(EditorLabelMode.Floating)
+                                    .ElementAttr("class", "required-validation").ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Số tiền vay ban đầu").LabelMode(EditorLabelMode.Floating)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Thời hạn vay (tháng)").LabelMode(EditorLabelMode.Floating)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Loại hình vay").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Tên tổ chức tín dụng").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

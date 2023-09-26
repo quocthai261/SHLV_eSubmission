@@ -1,0 +1,77 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">Thông tin khách hàng 
+        <i class="fa fa-caret-right" aria-hidden="true"></i> 
+        <strong>FATCA</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar six-step">
+                <li class="active" onclick="onProgressBarClicked('CusDetailGeneral')">Cá nhân</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailJob')">Nghề nghiệp</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailContact')">Liên hệ</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailAddress')">Địa chỉ</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailFatca')">FATCA</li>
+                <li onclick="onProgressBarClicked('CusDetailConfirm')">Xác nhận</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('CusDetailAddress')"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('CusDetailConfirm')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Khai báo FATCA</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                                    .Text("Tôi không có bất kỳ dấu hiệu Hoa Kỳ nào và tôi không phải là công dân Hoa Kỳ"))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                                    .Text("Tôi có một hoặc nhiều dấu hiệu Hoa Kỳ nào và tôi không phải là công dân Hoa Kỳ (Xin vui lòng hoàn thành mẫu đơn W-8BEN và cung cấp thêm các tài liệu liên quan"))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                                    .Text("Tôi có một hoặc nhiều dấu hiệu Hoa Kỳ nào và tôi là công dân Hoa Kỳ (Xin vui lòng hoàn thành mẫu đơn W-9)"))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Mã số thuệ tại Hoa Kỳ").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(15).ShowClearButton(true))
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

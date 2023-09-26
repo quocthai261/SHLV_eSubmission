@@ -1,0 +1,92 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+@await Html.PartialAsync("QuoDetailProduct")
+@await Html.PartialAsync("PopupChooseCustomer")
+
+<script>
+    function onPopupChooseCustomerClicked() {
+        $("#gridChooseCustomerList").dxDataGrid({
+            dataSource: DevExpress.data.AspNet.createStore({
+                loadUrl: '@Url.Action("GetCustomerList", "Customer", new { area = "Functions" })',
+            }),
+            showBorders: true,
+            selection: {
+                mode: "single"
+            },
+            columns: [
+                { dataField: "FullName", caption: "Họ và tên", width: 200 },
+                { dataField: "Gender", caption: "Giới tính", width: 100 },
+                { dataField: "Birthday", caption: "Ngày sinh", dataType: "datetime", format: "dd/MM/yyyy", alignment: "center", width: 120 },
+                { dataField: "HasIN", caption: "Có số định danh", dataType: "boolean", alignment: "center", width: 150 },
+                { dataField: "IdentificationNumber", caption: "Số định danh", width: 120 },
+                { dataField: "BirthNumber", caption: "Số giấy khai sinh", width: 150 },
+                { dataField: "IdNumber", caption: "Số giấy tờ tùy thân", width: 150 },
+                { dataField: "IssuedDate", caption: "Ngày cấp", dataType: "datetime", format: "dd/MM/yyyy", alignment: "center", width: 120 },
+                { dataField: "IssuedPlace", caption: "Nơi cấp", dataType: "datetime", format: "dd/MM/yyyy", alignment: "center", width: 120 }
+            ],
+            columnHidingEnabled: true,
+            allowColumnResizing: true,
+            columnAutoWidth: true,
+            columnMinWidth: 50,
+            showRowLines: true,
+            filterRow: {
+                visible: true
+            },
+            headerFilter: {
+                visible: false
+            },
+            groupPanel: {
+                visible: false
+            },
+            grouping: {
+                autoExpandAll: false
+            },
+            remoteOperations: false,
+            paging: {
+                pageSize: 10
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 20],
+                showInfo: true
+            }
+        });
+
+        var modal = document.getElementById("popupChooseCustomer");
+        modal.classList.add("show", "in");
+        modal.style.display = "block";
+    }
+
+    function onBackToQuotationListClicked() {
+        location.href = '@Url.Action("Index", "Quotation", new { area = "Functions" })';
+    }
+    
+    function onSaveQuotationClicked() {
+        notify("Cập nhật dữ liệu thành công", "success");
+
+        location.href = '@Url.Action("Index", "Quotation", new { area = "Functions" })';
+    }
+
+    function onProgressBarClicked(step) {
+        $.ajax({
+            url: '@Url.Action("StepPartialView", "Quotation", new { area = "Functions" })',
+            type: 'POST',
+            data: {
+                param: step
+            },
+            async: true,
+            success: function (result) {
+                $('#partialViewStep').html(result);
+            },
+        });
+    }
+</script>

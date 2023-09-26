@@ -1,0 +1,108 @@
+﻿@model eSubmission.Areas.Admin.Models.UserDetailViewModel
+@using eSubmission.Areas.Admin.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<UsersController> HtmlLocalizer
+
+<form asp-area="Admin" asp-controller="Users" asp-action="EditPost" method="post" class="form-horizontal">
+    <input type="hidden" id="selectedRoleIds" name="selectedRoleIds" />
+    <input type="hidden" id="oldRoleIdSelected" name="oldRoleIdSelected" value="@Model.RoleIDsStr" />
+    <section class="form-box">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-wizard form-body-material form-header-stylist wow fadeInUp" data-wow-delay="1200ms" style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp; padding: 0px !important;">
+                    <div class="row" style="text-align:right;padding: 10px">
+                        <div class="col-sm-12">
+                            @if (true)
+                            {
+                                <button type="submit" class="btn btn-purple-style" onclick="EventClickSaveButton()">
+@*                                     <i class="fa fa-floppy-o"></i>
+ *@                                    @HtmlLocalizer["Save"]
+                                </button>
+                            }
+                            <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-purple-style">
+@*                                 <i class="fa fa-backward"></i>
+ *@                                @HtmlLocalizer["Back"]
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="custom-tab" style="padding: 10px">
+                        <div class="nav-tabs-custom" style="background-color: #fff;">
+                            <ul class="nav nav-tabs">
+                                @if (true)
+                                {
+                                    <li class="active" id="tabAccount">
+                                        <a href="#tab1" data-toggle="tab">@HtmlLocalizer["AccountInformation"]</a>
+                                    </li>
+                                }
+                                @if (true)
+                                {
+                                    <li id="tabRole">
+                                        <a href="#tab2" data-toggle="tab">@HtmlLocalizer["UserGroupLabel"]</a>
+                                    </li>
+                                }
+                            </ul>
+
+                            <div class="tab-content">
+                                @if (true)
+                                {
+                                    <div class="tab-pane active" id="tab1">
+                                        <div style="padding: 10px">
+                                            @await Html.PartialAsync("_UserInformation")
+                                        </div>
+                                    </div>
+                                }
+                                @if (true)
+                                {
+                                    <div class="tab-pane" id="tab2">
+                                        <div id="UserRolesStyle" style="padding: 10px">
+                                            @await Html.PartialAsync("_UserRoles", Model)
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+<script> 
+
+    var selection = false;
+
+    function onSelectedChangedRole(e){
+        $("#gridContainer").dxDataGrid();
+        $("#gridContainer").dxDataGrid("instance").refresh();
+
+        if (selection) return;
+        selection = true;
+        e.component.selectRows(e.currentSelectedRowKeys[0], true);
+
+        if (e.selectedRowsData.length !== 0) {
+            var roleIDArr = [];
+            var roleIDStr = "";
+
+            for (var i = 0; i < e.selectedRowsData.length; i++) {
+                var roleID = e.selectedRowsData[i].RoleID;
+                roleIDStr = roleID.toString();
+                roleIDArr.push(roleIDStr);
+            }
+
+            roleIDStr = roleIDArr.join(",");
+            $('#selectedRoleIds').val(roleIDStr);
+        }
+        else {
+            
+        }
+        selection = false;
+    }
+
+    function EventClickSaveButton() {
+        
+    }
+
+</script>

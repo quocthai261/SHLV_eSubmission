@@ -1,0 +1,301 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<FinancialAnalysisController> HtmlLocalizer
+
+<div class="container-fluid p-0">
+
+    <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["fa"]</strong></h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>A. @HtmlLocalizer["pi"]</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label(String.Format(@HtmlLocalizer["fnameofib"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder(String.Format(@HtmlLocalizer["select"].Value))
+                                    .SearchEnabled(true).Label(String.Format(@HtmlLocalizer["gender"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DateBox()
+                                    .Type(DateBoxType.Date)
+                                    .DisplayFormat("dd/MM/yyyy")
+                                    .UseMaskBehavior(true)
+                                    .Placeholder("dd/mm/yyyy")
+                                    .Label(String.Format(@HtmlLocalizer["birth"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .ElementAttr("class", "required-validation").ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder(String.Format(@HtmlLocalizer["select"].Value))
+                                    .SearchEnabled(true).Label("Loại giấy tờ tùy thân").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label(String.Format(@HtmlLocalizer["cicn"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DateBox()
+                                    .Type(DateBoxType.Date)
+                                    .DisplayFormat("dd/MM/yyyy")
+                                    .UseMaskBehavior(true)
+                                    .Placeholder("dd/mm/yyyy")
+                                    .Label(String.Format(@HtmlLocalizer["issueddate"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .ElementAttr("class", "required-validation").ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Nghề nghiệp/Chức vụ").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder(String.Format(@HtmlLocalizer["select"].Value))
+                                    .SearchEnabled(true).Label("Nhóm nghề nghiệp").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Số người phụ thuộc").LabelMode(EditorLabelMode.Floating)
+                                    .Min(50).Max(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                                    .Text("Bên mua bảo hiểm là người được bảo hiểm"))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Mối quan hệ với BMBH").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Họ và tên (NĐBH)").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Giới tính").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DateBox()
+                                    .Type(DateBoxType.Date)
+                                    .DisplayFormat("dd/MM/yyyy")
+                                    .UseMaskBehavior(true)
+                                    .Placeholder("dd/mm/yyyy")
+                                    .Label("Ngày tháng năm sinh").LabelMode(EditorLabelMode.Floating)
+                                    .ElementAttr("class", "required-validation").ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Nghề nghiệp/Chức vụ").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Nhóm nghề nghiệp").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>B. NHU CẦU VÀ KẾ HOẠCH TÀI CHÍNH</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse02">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid<FinancialAnalysisModel>()
+                                    .ID("gridFinancialAnalysis")
+                                    .DataSource(d => d.WebApi()
+                                    .Area("Functions")
+                                    .Controller("FinancialAnalysis")
+                                    .LoadAction("GetFinancialAnalysisList")
+                                    )
+                                    .ShowBorders(true)
+                                    .Selection(s => s.Mode(SelectionMode.Single))
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().DataField(nameof(FinancialAnalysisModel.FinancialPlan)).Caption("Nhu cầu tài chính");
+                                        columns.Add().DataField(nameof(FinancialAnalysisModel.NecessarySmount)).Caption("Số tiền cần thiết ước tính (VND)").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(250);
+                                        columns.Add().DataField(nameof(FinancialAnalysisModel.CurrentAmount)).Caption("Số tiền bảo hiểm hiện có (VND)").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(250);
+                                        columns.Add().DataField(nameof(FinancialAnalysisModel.CurrentFinancialStatus)).Caption("Nhu cầu tài chính hiện tại (VND)").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(250);
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    .Summary(s => s.TotalItems(items =>
+                                    {
+                                        items.AddFor(m => m.FinancialPlan)
+                                        .SummaryType(SummaryType.Count)
+                                        .ValueFormat(Format.FixedPoint)
+                                        .DisplayFormat("Tổng cộng:");
+                                        items.AddFor(m => m.NecessarySmount)
+                                        .SummaryType(SummaryType.Sum)
+                                        .ValueFormat(Format.FixedPoint)
+                                        .DisplayFormat("{0}");
+                                        items.AddFor(m => m.CurrentAmount)
+                                        .SummaryType(SummaryType.Sum)
+                                        .ValueFormat(Format.FixedPoint)
+                                        .DisplayFormat("{0}");
+                                        items.AddFor(m => m.CurrentFinancialStatus)
+                                        .SummaryType(SummaryType.Sum)
+                                        .ValueFormat(Format.FixedPoint)
+                                        .DisplayFormat("{0}");
+                                    }))
+                                    )
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Phí bảo hiểm dự kiến đóng mỗi tháng (VND)").LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(99999999999).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Thời gian đóng phí dự kiến (Năm)").LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(100).ShowClearButton(true))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse03" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>C. CAM KẾT</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse03">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <div>
+                                    <p style="text-align: justify;">
+                                         Tôi xác nhận đã đọc và trả lời các câu hỏi trên và khẳng định tất cả các thông tin trên là chính xác và đúng sự thật. Tôi hiểu rằng đây là một phần trong bộ hồ sơ yêu cầu bảo hiểm của tôi đối với Công ty TNHH Bảo hiểm Shinhan Life Việt Nam.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                                    .Text("Tôi/Chúng tôi xin cam kết và xác nhận."))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row button-search-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit">Trở về</button>
+                        <button class="btn btn-purple-style" type="submit">Đồng ý</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

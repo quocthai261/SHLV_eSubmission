@@ -1,0 +1,26 @@
+﻿@{
+    if (ViewBag.Step == "PolicyOwner")
+    {
+        @await Html.PartialAsync("PolicyOwnerPartialView")
+    }
+    else if (ViewBag.Step == "LifeAssurance")
+    {
+        @await Html.PartialAsync("LifeAssurancePartialView")
+    }
+    else if (ViewBag.Step == "PolicyInformation")
+    {
+        @await Html.PartialAsync("PolicyInformationPartialView")
+    }
+    else if (ViewBag.Step == "BeneficiaryInformation")
+    {
+        @await Html.PartialAsync("BeneficiaryInformationPartialView")
+    }
+    else if (ViewBag.Step == "AddressContact")
+    {
+        @await Html.PartialAsync("AddressContactPartialView")
+    }
+    else if (ViewBag.Step == "Agreement")
+    {
+        @await Html.PartialAsync("AgreementPartialView")
+    }
+}

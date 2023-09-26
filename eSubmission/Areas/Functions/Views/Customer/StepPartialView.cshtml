@@ -1,0 +1,30 @@
+﻿@{
+    if (ViewBag.Step == "CusDetailGeneral")
+    {
+        @await Html.PartialAsync("CusDetailGeneral")
+    }
+    else if (ViewBag.Step == "CusDetailJob")
+    {
+        @await Html.PartialAsync("CusDetailJob")
+    }
+    else if (ViewBag.Step == "CusDetailContact")
+    {
+        @await Html.PartialAsync("CusDetailContact")
+    }
+    else if (ViewBag.Step == "CusDetailAddress")
+    {
+        @await Html.PartialAsync("CusDetailAddress")
+    }
+    else if (ViewBag.Step == "CusDetailFatca")
+    {
+        @await Html.PartialAsync("CusDetailFatca")
+    }
+    else if (ViewBag.Step == "CusDetailConfirm")
+    {
+        @await Html.PartialAsync("CusDetailConfirm")
+    }
+    else
+    {
+        @await Html.PartialAsync("CusDetailGeneral")
+    }
+}

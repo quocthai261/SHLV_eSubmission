@@ -1,0 +1,62 @@
+﻿<style>
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+        <div class="card card-body form-control-ui">
+            <p>
+                <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <strong>Shinhan - Vui Sống</strong>
+                </a>
+            </p>
+            <div class="collapse show" id="collapse01">
+                <div class="row">
+                    @* Câu 1 *@
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <p class="form-title-question"> 1. Quý khách có đang làm các công việc sau: bảo vệ có sử dụng súng; quân đội (ngoại trừ công việc văn phòng); công an (ngoại trừ công việc văn phòng); công nhân nhà máy công nghiệp nặng, hóa chất; làm việc tại giàn khoan dầu, khí đốt; làm việc ở độ cao trên 6 mét; lính cứu hỏa; đánh bắt thủy hải sản xa bờ; khai thác gỗ; khai thác mỏ, đá; thợ lặn; tài xế xe bọc thép, xe chở khí hóa lỏng/xăng dầu; công việc liên quan đến bom, mìn, chất nổ, vật liệu dễ cháy; diễn viên hành động, đóng thế không?  </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                .Width(80).Value(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            @(Html.DevExtreme().TextBox()
+                                .ElementAttr("class", "required-validation")
+                                .Label("Chi tiết").LabelMode(EditorLabelMode.Floating)
+                                .MaxLength(1000))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

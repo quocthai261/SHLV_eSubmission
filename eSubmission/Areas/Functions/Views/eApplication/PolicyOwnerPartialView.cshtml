@@ -1,0 +1,97 @@
+﻿
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">
+        Hồ sơ yêu cầu bảo hiểm
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <strong>Bên mua bảo hiểm</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar six-step">
+                <li class="active" onclick="onProgressBarClicked('PolicyOwner')">Bên mua bảo hiểm</li>
+                <li onclick="onProgressBarClicked('LifeAssurance')">Người được bảo hiểm</li>
+                <li onclick="onProgressBarClicked('PolicyInformation')">Thông tin hợp đồng tín dụng</li>
+                <li onclick="onProgressBarClicked('BeneficiaryInformation')">Thông tin người thụ hưởng</li>
+                <li onclick="onProgressBarClicked('AddressContact')">Địa chỉ liên hệ</li>
+                <li onclick="onProgressBarClicked('Agreement')">Cam kết của BMBH</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onBackToeAppListClicked()"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('LifeAssurance')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Bên mua bảo hiểm</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="custom-tab" style="padding: 10px">
+                        <div class="nav-tabs-custom" style="background-color: #fff;">
+                            <ul class="nav nav-tabs">
+                                <li class="active" id="tabGeneralInfor">
+                                    <a href="#tab1" data-toggle="tab">Thông tin chung</a>
+                                </li>
+                                <li id="tabCareer">
+                                    <a href="#tab2" data-toggle="tab">Nghề nghiệp</a>
+                                </li>
+                                <li id="tabContactInfor">
+                                    <a href="#tab3" data-toggle="tab">Thông tin liên lạc</a>
+                                </li>
+                                <li id="tabAddress">
+                                    <a href="#tab4" data-toggle="tab">Địa chỉ</a>
+                                </li>
+                                <li id="tabFATCA">
+                                    <a href="#tab5" data-toggle="tab">Khai báo FATCA</a>
+                                </li>
+                                <li id="tabGeneralQuestions">
+                                    <a href="#tab6" data-toggle="tab">Câu hỏi chung</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab1">
+                                    <div style="padding: 10px">
+                                        @await Html.PartialAsync("POInformationPartialViewSub")
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <div style="padding: 10px">
+                                        @await Html.PartialAsync("POCareerPartialViewSub")
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab3">
+                                    <div style="padding: 10px">
+                                        @await Html.PartialAsync("POContactInforPartialViewSub")
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab4">
+                                    <div style="padding: 10px">
+                                        @await Html.PartialAsync("POAddressPartialViewSub")
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab5">
+                                    <div style="padding: 10px">
+                                        @await Html.PartialAsync("POFATCAPartialViewSub")
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab6">
+                                    <div style="padding: 10px">
+                                        @await Html.PartialAsync("POGeneralQuestionPartialViewSub")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

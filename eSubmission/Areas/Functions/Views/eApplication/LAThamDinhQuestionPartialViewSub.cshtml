@@ -1,0 +1,42 @@
+﻿
+<div class="row">
+    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+        <div class="card card-body form-control-ui">
+            <div class="collapse show" id="collapse01">
+                <div class="custom-tab" style="padding: 10px">
+                    <div class="nav-tabs-custom" style="background-color: #fff;">
+                        <ul class="nav nav-tabs">
+                            <li class="active" id="tabQuestionsShinhanVuiSong">
+                                <a href="#tab11" data-toggle="tab">Shinhan - vui sống</a>
+                            </li>
+                            <li id="tabQuestionsShinhanSongKhoe">
+                                <a href="#tab12" data-toggle="tab">Shinhan - sống khỏe</a>
+                            </li>
+                            <li id="tabQuestionsShinhanCreditCare">
+                                <a href="#tab13" data-toggle="tab">Shinhan - credit care</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab11">
+                                <div style="padding: 10px">
+                                    @await Html.PartialAsync("QuestionsShinhanVuiSongPartialViewSub")
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab12">
+                                <div style="padding: 10px">
+                                    @await Html.PartialAsync("QuestionsShinhanSongKhoePartialViewSub")
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab13">
+                                <div style="padding: 10px">
+                                    @await Html.PartialAsync("QuestionsShinhanCreditCarePartialViewSub")
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

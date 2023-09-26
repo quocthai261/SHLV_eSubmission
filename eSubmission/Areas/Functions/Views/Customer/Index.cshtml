@@ -1,0 +1,156 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["customerslist"]</strong></h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">@HtmlLocalizer["filter"]</h5>
+                    <button class="btn btn-purple-invert btn-filter" type="submit" onclick="onAddNewCustomerClicked()"><span class="glyphicon glyphicon-plus"></span>@HtmlLocalizer["add"]</button>
+                </div>
+                <div class="card-body py-3">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label(String.Format(@HtmlLocalizer["username"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label(String.Format(@HtmlLocalizer["cicn"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(100).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                    .ID("nationality")
+                                    .DataSource(d => d.WebApi().Area("Functions").Controller("Customer").LoadAction("GetNationalityListApi"))
+                                    .DisplayExpr("Name")
+                                    .ValueExpr("Code")
+                                    .Placeholder(String.Format(@HtmlLocalizer["select"].Value))
+                                    .SearchEnabled(true).Label(String.Format(@HtmlLocalizer["nationality"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row button-search-row">
+                        <div class="col-md-12">
+                            <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["delete"]</button>
+                            <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["search"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-body py-3">
+                    @(Html.DevExtreme().DataGrid()
+                            .ID("gridCustomerList")
+                            .DataSource(d => d.WebApi()
+                            .Area("Functions")
+                            .Controller("Customer")
+                            .LoadAction("GetCustomerList")
+                            .Key("CustomerID")
+                            )
+                            .ShowBorders(true)
+                            .Selection(s => s.Mode(SelectionMode.Single))
+                            .Export(e => e.Enabled(true).AllowExportSelectedData(false)).OnExporting("exportingGridCustomer")
+                            .Editing(editing =>
+                            {
+                                editing.Texts(textBuilder =>
+                            {
+                                textBuilder.ConfirmDeleteMessage(confirmDeleteMessage);
+                                textBuilder.ConfirmDeleteTitle(confirmDeleteTitle);
+                            });
+                            })
+                            .Columns(columns =>
+                            {
+                                columns.Add().Caption("").Width(115)
+                                .CellTemplate(@<text>
+                                    <div class="dropdown">
+                                    <a class="dropbtn"> @HtmlLocalizer["action"]</a>
+                                        <div class="dropdown-content">
+                                            <a href="#">
+                                            @HtmlLocalizer["edit"]
+                                            </a>
+                                            <a href="#" title="Delete">
+                                                @HtmlLocalizer["delete"]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </text>);
+                                columns.Add().DataField(nameof(CustomerModel.CustomerID)).Visible(false);
+                                columns.Add().DataField(nameof(CustomerModel.FullName)).Caption(String.Format(@HtmlLocalizer["fullname"].Value));
+                                columns.Add().DataField(nameof(CustomerModel.Gender)).Caption(String.Format(@HtmlLocalizer["gender"].Value)).Width(100);
+                                columns.Add().DataField(nameof(CustomerModel.Birthday)).Caption(String.Format(@HtmlLocalizer["dateofbirth"].Value)).DataType(GridColumnDataType.DateTime).Format("dd/MM/yyyy  HH:mm").Alignment(HorizontalAlignment.Center).Width(150);
+                                columns.Add().DataField(nameof(CustomerModel.HasIN)).Caption(String.Format(@HtmlLocalizer["hin"].Value)).DataType(GridColumnDataType.Boolean).Alignment(HorizontalAlignment.Center).Width(150);
+                                columns.Add().DataField(nameof(CustomerModel.IdentificationNumber)).Caption(String.Format(@HtmlLocalizer["in"].Value)).Width(200);
+                                columns.Add().DataField(nameof(CustomerModel.BirthNumber)).Caption(String.Format(@HtmlLocalizer["bcn"].Value)).Width(200);
+                                columns.Add().DataField(nameof(CustomerModel.IdNumber)).Caption(String.Format(@HtmlLocalizer["cicn"].Value)).Width(200);
+                                columns.Add().DataField(nameof(CustomerModel.IssuedDate)).Caption(String.Format(@HtmlLocalizer["issueddate"].Value)).DataType(GridColumnDataType.DateTime).Format("dd/MM/yyyy  HH:mm").Alignment(HorizontalAlignment.Center).Width(150);
+                                columns.Add().DataField(nameof(CustomerModel.IssuedPlace)).Caption(String.Format(@HtmlLocalizer["issuedplace"].Value)).DataType(GridColumnDataType.DateTime).Format("dd/MM/yyyy  HH:mm").Alignment(HorizontalAlignment.Center).Width(150);
+                            })
+                        .ColumnHidingEnabled(true)
+                        .AllowColumnResizing(true)
+                        .ColumnAutoWidth(true)
+                        .ColumnMinWidth(50)
+                        .ShowRowLines(true)
+                        .FilterRow(f => f.Visible(true))
+                        .HeaderFilter(f => f.Visible(false))
+                        .GroupPanel(p => p.Visible(false))
+                        .Grouping(g => g.AutoExpandAll(false))
+                        .RemoteOperations(false)
+                        .Paging(paging => paging.PageSize(10))
+                        .Pager(pager =>
+                        {
+                            pager.ShowPageSizeSelector(true);
+                            pager.AllowedPageSizes(new[] { 5, 10, 20 });
+                            pager.ShowInfo(true);
+                        })
+                        )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onAddNewCustomerClicked() {
+        location.href = '@Url.Action("CustomerDetail", "Customer", new { area = "Functions" })';
+    }
+
+    function exportingGridCustomer(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Customer');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'CustomerList.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+</script>
+

@@ -1,0 +1,151 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<eApplicationController> HtmlLocalizer 
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0">
+    <h1 class="h4 mb-3 form-title"><strong>Danh sách hồ sơ yêu cầu bảo hiểm</strong></h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Filter</h5>
+                    <button class="btn btn-purple-invert btn-filter" type="submit" onclick="onAddNeweApplicationClicked()"><span class="glyphicon glyphicon-plus"></span> Thêm mới</button>
+                </div>
+                <div class="card-body py-3">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label("Mã hồ sơ YCBH").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label("Người mua bảo hiểm").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(100).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                    .ID("mainproduct")
+                                    .DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetProductListApi"))
+                                    .DisplayExpr("ProductName")
+                                    .ValueExpr("ProductCode")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Sản phẩm chính").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row button-search-row">
+                        <div class="col-md-12">
+                            <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["Delete"]</button>
+                            <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["Search"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-body py-3">
+                    @(Html.DevExtreme().DataGrid()
+                            .ID("grideAppList")
+                            .DataSource(d => d.WebApi()
+                            .Area("Functions")
+                            .Controller("eApplication")
+                            .LoadAction("GeteAppList")
+                            .Key("eAppID")
+                            )
+                            .ShowBorders(true)
+                            .Selection(s => s.Mode(SelectionMode.Single))
+                            .Export(e => e.Enabled(true).AllowExportSelectedData(false)).OnExporting("exportingGrideApp")
+                            .Editing(editing =>
+                            {
+                                editing.Texts(textBuilder =>
+                            {
+                                textBuilder.ConfirmDeleteMessage(confirmDeleteMessage);
+                                textBuilder.ConfirmDeleteTitle(confirmDeleteTitle);
+                            });
+                            })
+                            .Columns(columns =>
+                            {
+                                columns.Add().Caption("").Width(115)
+                            .CellTemplate(@<text>
+                                <div class="dropdown">
+                                    <a class="dropbtn">Thao tác</a>
+                                    <div class="dropdown-content">
+                                        <a href="#">
+                                            Sửa
+                                        </a>
+                                        <a href="#" title="Delete">
+                                            Xóa
+                                        </a>
+                                    </div>
+                                </div>
+                            </text>);
+                                columns.Add().DataField(nameof(eApplicationModel.eAppID)).Visible(false);
+                                columns.Add().DataField(nameof(eApplicationModel.eAppNo)).Caption("Mã HSYCBH");
+                                columns.Add().DataField(nameof(eApplicationModel.POName)).Caption("Người mua bảo hiểm").Width(200);
+                                columns.Add().DataField(nameof(eApplicationModel.LAName)).Caption("Người được bảo hiểm").Width(200);
+                                columns.Add().DataField(nameof(eApplicationModel.ProductName)).Caption("Sản phẩm chính").Width(200);
+                                columns.Add().DataField(nameof(eApplicationModel.eAppStatus)).Caption("Trạng thái").Width(200);
+                            })
+                        .ColumnHidingEnabled(true)
+                        .AllowColumnResizing(true)
+                        .ColumnAutoWidth(true)
+                        .ColumnMinWidth(50)
+                        .ShowRowLines(true)
+                        .FilterRow(f => f.Visible(true))
+                        .HeaderFilter(f => f.Visible(false))
+                        .GroupPanel(p => p.Visible(false))
+                        .Grouping(g => g.AutoExpandAll(false))
+                        .RemoteOperations(false)
+                        .Paging(paging => paging.PageSize(10))
+                        .Pager(pager =>
+                        {
+                            pager.ShowPageSizeSelector(true);
+                            pager.AllowedPageSizes(new[] { 5, 10, 20 });
+                            pager.ShowInfo(true);
+                        })
+                        )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function onAddNeweApplicationClicked() {
+        location.href = '@Url.Action("eApplicationDetail", "eApplication", new { area = "Functions" })';
+    }
+
+    function exportingGrideApp(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('eApplication');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'eApplicationList.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+</script>

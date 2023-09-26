@@ -1,0 +1,28 @@
+﻿<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="form-group">
+            @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                .Text("Tôi không có bất kỳ dấu hiệu Hoa Kỳ nào và tôi không phải là công dân Hoa Kỳ"))
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="form-group">
+            @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                .Text("Tôi có một hoặc nhiều dấu hiệu Hoa Kỳ nào và tôi không phải là công dân Hoa Kỳ (Xin vui lòng hoàn thành mẫu đơn W-8BEN và cung cấp thêm các tài liệu liên quan"))
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="form-group">
+            @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                .Text("Tôi có một hoặc nhiều dấu hiệu Hoa Kỳ nào và tôi là công dân Hoa Kỳ (Xin vui lòng hoàn thành mẫu đơn W-9)"))
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+        <div class="form-group">
+            @(Html.DevExtreme().TextBox()
+                .ElementAttr("class", "required-validation")
+                .Label("Mã số thuệ tại Hoa Kỳ").LabelMode(EditorLabelMode.Floating)
+                .MaxLength(15).ShowClearButton(true))
+        </div>
+    </div>
+</div>

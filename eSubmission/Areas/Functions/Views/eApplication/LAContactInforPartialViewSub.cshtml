@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+        <div class="card card-body form-control-ui">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Số diện thoại di động").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true))
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .Label("Số điện thoại nhà").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(100).ShowClearButton(true))
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Email").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

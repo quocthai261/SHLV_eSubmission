@@ -1,0 +1,75 @@
+﻿<div class="modal fade" id="popupAddRider" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="background: #00000080;">
+    <div class="modal-dialog modal-lg" style="max-height:90%; margin-top: 100px;">
+        <div class="modal-content" style="max-height: 90%; overflow-y: auto;">
+            <div class="modal-header">
+                <h1 class="h4 mb-3 form-title"><strong>Thêm sản phẩm bổ sung</strong></h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            @(Html.DevExtreme().SelectBox()
+                            //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                //.DisplayExpr("PayModeName")
+                                //.ValueExpr("PayModeID")
+                                .Placeholder("Chọn")
+                                .SearchEnabled(true).Label("Sản phẩm bổ sung").LabelMode(EditorLabelMode.Floating)
+                                .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                )
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                            @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                .Label("Số tiền bảo hiểm").Value(236000).LabelMode(EditorLabelMode.Floating)
+                                .Min(0).Max(99999999999).ReadOnly(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                            @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                .Label("Thời hạn bảo hiểm (Năm)").Value(1).LabelMode(EditorLabelMode.Floating)
+                                .Min(0).Max(99999999999).ReadOnly(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                            @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                .Label("Thời hạn đóng phí (Năm)").Value(1).LabelMode(EditorLabelMode.Floating)
+                                .Min(0).Max(99999999999).ReadOnly(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                        <div class="form-group">
+                            @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                .Label("Phí bảo hiểm định kỳ").Value(236000).LabelMode(EditorLabelMode.Floating)
+                                .Min(0).Max(99999999999).ReadOnly(true))
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveAddRider" onclick="onButtonSaveAddRiderClicked()" type="button" class="btn btn-purple-style">Lưu</button>
+                <button id="btnCloseAddRider" onclick="onButtonCloseAddRiderClicked()" type="button" class="btn btn-purple-style">Thoát</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function onButtonSaveAddRiderClicked() {
+        var modal = document.getElementById("popupAddRider");
+        modal.classList.remove("show", "in");
+        modal.style.display = "none";
+
+        notify("Cập nhật dữ liệu thành công", "success");
+    }
+
+    function onButtonCloseAddRiderClicked() {
+        var modal = document.getElementById("popupAddRider");
+        modal.classList.remove("show", "in");
+        modal.style.display = "none";
+    }
+
+</script>

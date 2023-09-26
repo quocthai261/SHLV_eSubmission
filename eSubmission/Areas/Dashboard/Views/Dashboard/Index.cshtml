@@ -1,0 +1,222 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Dashboard.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<DashboardController> HtmlLocalizer
+
+@* @{
+    var userNameLabel = String.Format(@HtmlLocalizer["UserNameLabel"].Value);
+    var fullNameLabel = String.Format(@HtmlLocalizer["FullNameLabel"].Value);
+    var emailLabel = String.Format(@HtmlLocalizer["EmailLabel"].Value);
+    var phoneLabel = String.Format(@HtmlLocalizer["PhoneLabel"].Value);
+    var userGroupPlaceHolder = String.Format(@HtmlLocalizer["UserGroupPlaceHolder"].Value);
+    var userGroupLabel = String.Format(@HtmlLocalizer["UserGroupLabel"].Value);
+    var userTypeLabel = String.Format(@HtmlLocalizer["UserTypeLabel"].Value);
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+    var isActive = String.Format(@HtmlLocalizer["IsActive"].Value);
+} *@
+
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="row row-dashboard">
+                <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["contractssoldperday"]</strong></h1>
+                @(Html.DevExtreme().Chart()
+                    .ID("chartContract")
+                    .Series(s => s
+                    .Add()
+                    .ArgumentField("Day")
+                    .ValueField("Oranges")
+                    .Name(String.Format(@HtmlLocalizer["quantity"].Value))
+                    .Type(SeriesType.Bar)
+                    .Color("#725DCF")
+                    )
+                    .DataSource(new[] {
+                new { Day = String.Format(@HtmlLocalizer["mon"].Value), Oranges = 3 },
+                new { Day = String.Format(@HtmlLocalizer["tue"].Value), Oranges = 2 },
+                new { Day = String.Format(@HtmlLocalizer["wed"].Value), Oranges = 3 },
+                new { Day = String.Format(@HtmlLocalizer["thu"].Value), Oranges = 4 },
+                new { Day = String.Format(@HtmlLocalizer["fri"].Value), Oranges = 6 },
+                new { Day = String.Format(@HtmlLocalizer["sat"].Value), Oranges = 11 },
+                new { Day = String.Format(@HtmlLocalizer["sun"].Value), Oranges = 4 }
+                    })
+                )
+            </div>
+            <div class="row row-dashboard">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                    <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["contractssoldbyproducts"]</strong></h1>
+                    @(Html.DevExtreme().PieChart()
+                        .Series(s =>
+                        {
+                            s.Add().ArgumentField("Name").ValueField("Area").Label(e => { e.Visible(true); e.Format("percent"); });
+
+                        })
+                        .Palette(VizPalette.Soft)
+                        .SizeGroup("sizeGroupName")
+                        .Legend(l => l
+                        .VerticalAlignment(VerticalEdge.Bottom)
+                        .HorizontalAlignment(HorizontalAlignment.Center)
+                        .ItemTextPosition(Position.Right)
+                        .RowCount(2)
+                        )
+                        .DataSource(new[] {
+                                new { Name = "Shinhan - Vui Sống", Area = 0.12 },
+                                new { Name = "Shinhan - Thành Tài", Area = 0.07 },
+                                new { Name = "Shinhan - Tâm An", Area = 0.07 },
+                                new { Name = "Shinhan - Sống Khỏe", Area = 0.09 },
+                                new { Name = "Shinhan - Credit Care", Area = 0.16 },
+                                new { Name = "Shinhan - Credit Care Plus", Area = 0.45 },
+                        })
+                        )
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                    <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["contractssoldbychannels"]</strong></h1>
+                    @(Html.DevExtreme().PieChart()
+                        .Series(s =>
+                        {
+                            s.Add().ArgumentField("Name").ValueField("Area").Label(e => { e.Visible(true); e.Format("percent"); });
+                        })
+                        .Palette(VizPalette.SoftPastel)
+                        .SizeGroup("sizeGroupName")
+                        .Legend(l => l
+                        .VerticalAlignment(VerticalEdge.Bottom)
+                        .HorizontalAlignment(HorizontalAlignment.Center)
+                        .ItemTextPosition(Position.Right)
+                        .RowCount(2)
+                        )
+                        .DataSource(new[] {
+                            new { Name = "Direct Sell", Area = 0.31 },
+                            new { Name = "Telemarketing", Area = 0.55 },
+                            new { Name = "Banca", Area = 0.19 }
+                        })
+                        )
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="row row-dashboard">
+                <div class="col-12">
+                    <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["customerslist"]</strong> <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["details"]</button></h1>
+                </div>
+                <div class="col-12 card-summary">
+                    <strong class="value-summary">352</strong>
+                    <br/>
+                    <strong class="title-summary">@HtmlLocalizer["customers"]</strong>
+                </div>
+            </div>
+            <div class="row row-dashboard">
+                <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["requestedrecords"]</strong> <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["details"]</button></h1>
+                <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 card-summary">
+                    <strong class="value-summary">320</strong>
+                    <br />
+                    <strong class="title-summary">@HtmlLocalizer["submitted"]</strong>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 card-summary">
+                    <strong class="value-summary">25</strong>
+                    <br />
+                    <strong class="title-summary">@HtmlLocalizer["awaitingpayment"]</strong>
+                </div>
+                <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 card-summary">
+                    <strong class="value-summary">178</strong>
+                    <br />
+                    <strong class="title-summary">@HtmlLocalizer["incomplete"]</strong>
+                </div>
+            </div>
+            <div class="row row-dashboard">
+                <div class="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
+                    <div class="wrimagecard wrimagecard-topimage">
+                        <a href="#">
+                            <div class="wrimagecard-topimage_header">
+                                <center>
+                                    <img src="/images/icon/icon-product.png" class="icon-dashborad"/>
+                                </center>
+                            </div>
+                            <div class="wrimagecard-topimage_title" style="color:#725dcf">
+                                <strong>
+                                    @HtmlLocalizer["productlist"]
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
+                    <div class="wrimagecard wrimagecard-topimage">
+                        <a href="#">
+                            <div class="wrimagecard-topimage_header">
+                                <center>
+                                    <img src="/images/icon/icon-financial.png" class="icon-dashborad"/>
+                                </center>
+                            </div>
+                            <div class="wrimagecard-topimage_title" style="color:#725dcf">
+                                <strong>
+                                    @HtmlLocalizer["financialneeds"]
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
+                    <div class="wrimagecard wrimagecard-topimage">
+                        <a href="#">
+                            <div class="wrimagecard-topimage_header">
+                                <center>
+                                    <img src="/images/icon/icon-quotation.png" class="icon-dashborad"/>
+                                </center>
+                            </div>
+                            <div class="wrimagecard-topimage_title" style="color:#725dcf">
+                                <strong>
+                                    @HtmlLocalizer["illustrationboard"]
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
+                    <div class="wrimagecard wrimagecard-topimage">
+                        <a href="#">
+                            <div class="wrimagecard-topimage_header">
+                                <center><img src="/images/icon/icon-eapp.png" class="icon-dashborad"/></center>
+                            </div>
+                            <div class="wrimagecard-topimage_title" style="color:#725dcf">
+                                <strong>
+                                    @HtmlLocalizer["requestedrecords"]
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
+                    <div class="wrimagecard wrimagecard-topimage">
+                        <a href="#">
+                            <div class="wrimagecard-topimage_header">
+                                <center><img src="/images/icon/icon-payment.png" class="icon-dashborad"/></center>
+                            </div>
+                            <div class="wrimagecard-topimage_title" style="color:#725dcf">
+                                <strong>
+                                    @HtmlLocalizer["payment"]
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
+                    <div class="wrimagecard wrimagecard-topimage">
+                        <a href="#">
+                            <div class="wrimagecard-topimage_header">
+                                <center>
+                                    <img src="/images/icon/icon-contract.png" class="icon-dashborad"/>
+                                </center>
+                            </div>
+                            <div class="wrimagecard-topimage_title" style="color:#725dcf">
+                                <strong>
+                                    @HtmlLocalizer["contractslist"]
+                                </strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+﻿@{
+    var option = new[] { "Địa chỉ đăng ký thường trú", "Địa chỉ nơi ở hiện tại", "Khác" };
+}
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">
+        Hồ sơ yêu cầu bảo hiểm
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <strong>Địa chỉ liên hệ</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar six-step">
+                <li class="active" onclick="onProgressBarClicked('PolicyOwner')">Bên mua bảo hiểm</li>
+                <li class="active" onclick="onProgressBarClicked('LifeAssurance')">Người được bảo hiểm</li>
+                <li class="active" onclick="onProgressBarClicked('PolicyInformation')">Thông tin hợp đồng tín dụng</li>
+                <li class="active" onclick="onProgressBarClicked('BeneficiaryInformation')">Thông tin người thụ hưởng</li>
+                <li class="active" onclick="onProgressBarClicked('AddressContact')">Địa chỉ liên hệ</li>
+                <li onclick="onProgressBarClicked('Agreement')">Cam kết của BMBH</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('BeneficiaryInformation')"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('Agreement')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Địa chỉ liên hệ</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <i>Chọn một trong những lựa chọn sau đây</i>
+                    @(Html.DevExtreme().RadioGroup()
+                        .Items(option)
+                        .Value("Địa chỉ đăng ký thường trú")
+                        .ElementAttr("class", "RadioPurpleDot")
+                        )
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Số nhà, tên đường").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Khu phố/thôn/xóm").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Tỉnh/Thành phố").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Quận / Huyện").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Phường/Xã/Thị trấn").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Quốc gia").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Mã bưu điện").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true)
+                                    .ReadOnly(true)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Phương thức nhận bộ hợp đồng</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse02">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Phương thức nhận bộ hợp đồng").LabelMode(EditorLabelMode.Floating)
+                                    .Value("Email")
+                                    .MaxLength(50).ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

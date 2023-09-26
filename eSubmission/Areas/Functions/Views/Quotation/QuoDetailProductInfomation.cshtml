@@ -1,0 +1,223 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">
+        Bảng minh họa
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <strong>Thông tin sản phẩm</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar five-step">
+                <li class="active" onclick="onProgressBarClicked('QuoDetailProduct')">Chọn sản phẩm</li>
+                <li class="active" onclick="onProgressBarClicked('QuoDetailPolicyOwner')">Bên mua bảo hiểm</li>
+                <li class="active" onclick="onProgressBarClicked('QuoDetailLifeAssured')">Người được bảo hiểm</li>
+                <li class="active" onclick="onProgressBarClicked('QuoDetailProductInfomation')">Thông tin sản phẩm</li>
+                <li onclick="onProgressBarClicked('QuoDetailInformation')">Thông tin chi tiết</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('QuoDetailLifeAssured')"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('QuoDetailInformation')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Địa chỉ đăng ký thường trú</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .Label("Tháng").Value(236000).LabelMode(EditorLabelMode.Floating)
+                                    .ReadOnly(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .Label("Quý").Value(657000).LabelMode(EditorLabelMode.Floating)
+                                    .ReadOnly(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .Label("Nửa năm").Value(1214000).LabelMode(EditorLabelMode.Floating)
+                                    .ReadOnly(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .Label("Năm").Value(2337000).LabelMode(EditorLabelMode.Floating)
+                                    .ReadOnly(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Tiền tệ").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(3).Value("VND").ReadOnly(true))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Sản phẩm chính</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse02">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Sản phẩm chính").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                    .Label("Số tiền bảo hiểm").Value(236000).LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(99999999999).ReadOnly(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                    .Label("Thời hạn bảo hiểm (Năm)").Value(1).LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(99999999999).ReadOnly(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                    .Label("Thời hạn đóng phí (Năm)").Value(1).LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(99999999999).ReadOnly(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-2 col-xl-2">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox().ElementAttr("class", "required-validation")
+                                    .Label("Phí bảo hiểm định kỳ").Value(236000).LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(99999999999).ReadOnly(true))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse03" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Sản phẩm bổ sung</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse03">
+                    <div class="row button-right-row">
+                        <div class="col-md-12">
+                            <button class="btn btn-purple-style" type="submit" onclick="onPopupAddNewRiderClicked()"><span class="glyphicon glyphicon-plus"></span> Thêm sản phẩm bổ sung</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            @(Html.DevExtreme().DataGrid()
+                                    .ID("gridRiderByCustomerList")
+                                    .DataSource(d => d.WebApi()
+                                    .Area("Functions")
+                                    .Controller("Quotation")
+                                    .LoadAction("GetRiderByCustomerList")
+                                    .Key("RiderID")
+                                    )
+                                    .ShowBorders(true)
+                                    .Selection(s => s.Mode(SelectionMode.Single))
+                                    .Editing(editing =>
+                                    {
+                                        editing.Texts(textBuilder =>
+                                    {
+                                        textBuilder.ConfirmDeleteMessage(confirmDeleteMessage);
+                                        textBuilder.ConfirmDeleteTitle(confirmDeleteTitle);
+                                    });
+                                    })
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("").Width(115)
+                                    .CellTemplate(@<text>
+                                        <div class="dropdown">
+                                            <a class="dropbtn">Thao tác</a>
+                                            <div class="dropdown-content">
+                                                <a href="#">
+                                                    Sửa
+                                                </a>
+                                                <a href="#" title="Delete">
+                                                    Xóa
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </text>);
+                                        columns.Add().DataField(nameof(RiderByCustomerModel.RiderID)).Visible(false);
+                                        columns.Add().DataField(nameof(RiderByCustomerModel.Group)).GroupCellTemplate(new JS("function(element, options) { element.text(options.value); }")).GroupIndex(0);
+                                        columns.Add().DataField(nameof(RiderByCustomerModel.ProductName)).Caption("Tên sản phẩm bổ sung");
+                                        columns.Add().DataField(nameof(RiderByCustomerModel.SumAssured)).Caption("Số tiền bảo hiểm").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(170);
+                                        columns.Add().DataField(nameof(RiderByCustomerModel.PolicyTerm)).Caption("Thời hạn bảo hiểm").Caption("Thời hạn đóng phí").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(170);
+                                        columns.Add().DataField(nameof(RiderByCustomerModel.PremiumTerm)).Caption("Thời hạn đóng phí").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(170);
+                                        columns.Add().DataField(nameof(RiderByCustomerModel.Premium)).Caption("Định kỳ đóng phí").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(170);
+                                    })
+                                .ColumnHidingEnabled(true)
+                                .AllowColumnResizing(true)
+                                .ColumnAutoWidth(true)
+                                .ColumnMinWidth(50)
+                                .ShowRowLines(true)
+                                .FilterRow(f => f.Visible(false))
+                                .HeaderFilter(f => f.Visible(false))
+                                .GroupPanel(p => p.Visible(false))
+                                .Grouping(g => g.AutoExpandAll(true))
+                                .RemoteOperations(false)
+                                .Paging(paging => paging.PageSize(10))
+                                .Pager(pager =>
+                                {
+                                    pager.ShowPageSizeSelector(true);
+                                    pager.AllowedPageSizes(new[] { 5, 10, 20 });
+                                    pager.ShowInfo(true);
+                                })
+                                )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("PopupAddRider")
+
+<script>
+
+    function onPopupAddNewRiderClicked() {
+        var modal = document.getElementById("popupAddRider");
+        modal.classList.add("show", "in");
+        modal.style.display = "block";
+    }
+
+</script>

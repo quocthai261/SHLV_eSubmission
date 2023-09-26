@@ -1,0 +1,169 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<ProductController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0">
+
+    <h1 class="h4 mb-3 form-title"><strong>@HtmlLocalizer["productslist"]</strong></h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">@HtmlLocalizer["filter"]</h5>
+                    <button class="btn btn-purple-invert btn-filter" type="submit"><span class="glyphicon glyphicon-plus"></span>@HtmlLocalizer["add"]</button>
+                </div>
+                <div class="card-body py-3">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label(String.Format(@HtmlLocalizer["productname"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label(String.Format(@HtmlLocalizer["productid"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(100).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                    .ID("payMode")
+                                    .DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    .DisplayExpr("PayModeName")
+                                    .ValueExpr("PayModeID")
+                                    .Placeholder(String.Format(@HtmlLocalizer["select"].Value))
+                                    .SearchEnabled(true).Label(String.Format(@HtmlLocalizer["methodpayment"].Value)).LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row button-search-row">
+                        <div class="col-md-12">
+                            <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["delete"]</button>
+                            <button class="btn btn-purple-style" type="submit">@HtmlLocalizer["search"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-body py-3">
+                    @(Html.DevExtreme().DataGrid()
+                        .ID("gridProductList")
+                        .DataSource(d => d.WebApi()
+                        .Area("Functions")
+                        .Controller("Product")
+                        .LoadAction("GetProductList")
+                        .Key("ProductID")
+                        )
+                        .ShowBorders(true)
+                        .Selection(s => s.Mode(SelectionMode.Single))
+                        .Export(e => e.Enabled(true).AllowExportSelectedData(false)).OnExporting("exportingGridProduct")
+                        .Editing(editing =>
+                        {
+                            editing.Texts(textBuilder =>
+                            {
+                                textBuilder.ConfirmDeleteMessage(confirmDeleteMessage);
+                                textBuilder.ConfirmDeleteTitle(confirmDeleteTitle);
+                            });
+                        })
+                        .Columns(columns =>
+                        {
+                            columns.Add().DataField(nameof(ProductModel.ProductID)).Visible(false);
+                            columns.Add().DataField(nameof(ProductModel.ProductCode)).Caption(String.Format(@HtmlLocalizer["productid"].Value)).Width(200);
+                            columns.Add().DataField(nameof(ProductModel.ProductName)).Caption(String.Format(@HtmlLocalizer["productname"].Value));
+                            columns.Add().DataField(nameof(ProductModel.PayMode)).Caption(String.Format(@HtmlLocalizer["methodpayment"].Value)).Width(200);
+                            columns.Add().DataField(nameof(ProductModel.POAge)).Caption(String.Format(@HtmlLocalizer["agebuyer"].Value)).Width(200);
+                            columns.Add().DataField(nameof(ProductModel.LAAge)).Caption(String.Format(@HtmlLocalizer["ageinsured"].Value)).Width(200);
+                            columns.Add().DataField(nameof(ProductModel.MaturityAge)).Caption(String.Format(@HtmlLocalizer["maturity"].Value)).DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(200);
+                            columns.Add().DataField(nameof(ProductModel.InsureAmountMin)).Caption(String.Format(@HtmlLocalizer["mpp"].Value)).DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(200);
+                            columns.Add().DataField(nameof(ProductModel.InsureAmountMax)).Caption(String.Format(@HtmlLocalizer["maxpp"].Value)).DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(200);
+                        })
+                        .ColumnHidingEnabled(true)
+                        .AllowColumnResizing(true)
+                        .ColumnAutoWidth(true)
+                        .ColumnMinWidth(50)
+                        .ShowRowLines(true)
+                        .FilterRow(f => f.Visible(true))
+                        .HeaderFilter(f => f.Visible(false))
+                        .GroupPanel(p => p.Visible(false))
+                        .Grouping(g => g.AutoExpandAll(false))
+                        .RemoteOperations(false)
+                        .Paging(paging => paging.PageSize(5))
+                        .Pager(pager =>
+                        {
+                            pager.ShowPageSizeSelector(true);
+                            pager.AllowedPageSizes(new[] { 5, 10, 20 });
+                            pager.ShowInfo(true);
+                        })
+                        .MasterDetail(md =>
+                        {
+                            md.Enabled(true);
+                            md.Template(@<text>
+                                <div class="master-detail-caption"><strong>Sản phẩm bổ sung:</strong></div>
+                                @(Html.DevExtreme().DataGrid()
+                                            .ID("gridRider")
+                                            .DataSource(d => d.WebApi()
+                                            .Area("Functions")
+                                            .Controller("Product")
+                                            .LoadAction("GetRiderList")
+                                            .Key("RiderID")
+                                            .LoadParams(new { id = new JS("data.ProductID") })
+                                            )
+                                            .ColumnAutoWidth(true)
+                                            .ShowBorders(true)
+                                            .Columns(columns =>
+                                            {
+                                    columns.Add().DataField(nameof(RiderModel.ProductID)).Visible(false);
+                                    columns.Add().DataField(nameof(RiderModel.RiderCode)).Caption("Mã sản phẩm bổ sung").Width(200);
+                                    columns.Add().DataField(nameof(RiderModel.RiderName)).Caption("Mã sản phẩm bổ sung");
+                                    columns.Add().DataField(nameof(RiderModel.InsureAmountMin)).Caption("Số tiền BH tối thiểu").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(200);
+                                    columns.Add().DataField(nameof(RiderModel.InsureAmountMax)).Caption("Số tiền BH tối đa").DataType(GridColumnDataType.Number).Format(Format.FixedPoint).Alignment(HorizontalAlignment.Right).Width(200);
+                                }).ColumnHidingEnabled(true)
+                                .AllowColumnResizing(true)
+                                .ColumnAutoWidth(true)
+                                .ColumnMinWidth(50)
+                                .ShowRowLines(true)
+                                )
+                             </text>);
+                        })
+                        )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function exportingGridProduct(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Product');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'ProductList.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+</script>

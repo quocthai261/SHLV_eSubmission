@@ -1,0 +1,81 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">Thông tin khách hàng 
+        <i class="fa fa-caret-right" aria-hidden="true"></i> 
+        <strong>Xác nhận</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar six-step">
+                <li class="active" onclick="onProgressBarClicked('CusDetailGeneral')">Cá nhân</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailJob')">Nghề nghiệp</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailContact')">Liên hệ</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailAddress')">Địa chỉ</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailFatca')">FATCA</li>
+                <li class="active" onclick="onProgressBarClicked('CusDetailConfirm')">Xác nhận</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('CusDetailFatca')"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onSaveToCustomerClicked()">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Cam kết và xác nhận</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <div>
+                                    <strong> Tôi/chúng tôi, Bên mua bảo hiểm/Người được bảo hiểm theo đây cam kết và đồng ý:</strong>
+                                    <p style="text-align: justify;">
+                                        <i class="fa fa-circle" aria-hidden="true" style="font-size:10px"></i> Yêu cầu thay đổi này chỉ có giá trị hiệu lực khi được Shinhan Life Việt Nam chấp thuận bằng văn bản và với điều kiện NĐBH còn sống tại thời điểm chấp thuận.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <i class="fa fa-circle" aria-hidden="true" style="font-size:10px"></i> Toàn bộ thông tin được nêu trong Phiếu yêu cầu này là có thật, đã được tôi/chúng tôi cung cấp đầy đủ, chính xác và toàn vẹn.
+                                    </p>
+                                    <p style="text-align: justify;">
+                                        <i class="fa fa-circle" aria-hidden="true" style="font-size:10px"></i> Cho phép Công ty được quyền tự mình hoặc thông qua các bên thứ ba, bao gồm cả bác sỹ,
+                                        bệnh viện, phòng mạch, công ty bảo hiểm, các tổ chức hay bên thứ ba để tìm hiểu, thu thập, sao
+                                        chép và lưu trữ các thông tin cá nhân của tôi/chúng tôi nhằm mục đích phục vụ cho công việc
+                                        cần thiết liên quan đến các hợp đồng bảo hiểm mà tôi/chúng tôi đã tham gia với Hanwha Life
+                                        Việt Nam. Tôi/chúng tôi đồng ý và chấp thuận thêm rằng bất cứ bên thứ ba nào được Công ty
+                                        tiếp xúc hoặc yêu cầu đều được quyền cung cấp các thông tin cá nhân của tôi/chúng tôi mà họ
+                                        có thể có vào từng thời điểm. Tôi/chúng tôi đồng ý và cho phép Công ty sử dụng và cung cấp
+                                        các thông tin thu thập được cho các cá nhân/đơn vị liên kết hoặc bên thứ ba độc lập, ở trong
+                                        hay ngoài Việt Nam, để thực hiện việc xử lý thông tin, tư vấn hay cung cấp thông tin liên quan
+                                        đến sản phẩm hay dịch vụ, hoặc nhằm mục đích phục vụ hoạt động kinh doanh của Công ty.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                                    .Text("Tôi/Chúng tôi xin cam kết và xác nhận."))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

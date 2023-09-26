@@ -1,0 +1,27 @@
+﻿@await Html.PartialAsync("PolicyOwnerPartialView")
+
+<script>
+    function onBackToeAppListClicked() {
+        location.href = '@Url.Action("Index", "eApplication", new { area = "Functions" })';
+    }
+
+    function onSaveToeApplicationClicked() {
+        notify("Cập nhật dữ liệu thành công", "success");
+
+        location.href = '@Url.Action("Index", "eApplication", new { area = "Functions" })';
+    }
+
+    function onProgressBarClicked(step) {
+        $.ajax({
+            url: '@Url.Action("StepPartialView", "eApplication", new { area = "Functions" })',
+            type: 'POST',
+            data: {
+                param: step
+            },
+            async: true,
+            success: function (result) {
+                $('#partialViewStep').html(result);
+            },
+        });
+    }
+</script>

@@ -1,0 +1,134 @@
+﻿<div class="row">
+    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+        <div class="card card-body form-control-ui">
+            <div class="row button-right-row">
+                <div class="col-md-12">
+                    <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('PolicyOwner')">Chọn thông tin khách hàng &nbsp<span class="bi bi-download"></span></button>
+                    <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('PolicyInformation')">Xóa thông tin &nbsp<span class="bi bi-person-dash-fill"></span></button>
+                    <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('PolicyInformation')">Thêm người thụ hưởng &nbsp<span class="bi bi-plus-circle"></span></button>
+
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                        @(Html.DevExtreme().CheckBox().Value(false).IconSize(18).ElementAttr("aria-label", "Custom size")
+                            .Text("Người thụ hưởng là bên mua bảo hiểm"))
+                    </div>
+                    <span>Lưu ý: Người thụ hưởng nên trên 18 tuổi</span>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Họ").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Tên đệm").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Tên").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetGenderList"))
+                            .DisplayExpr("GenderName")
+                            .ValueExpr("GenderCode")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Giới tính").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().DateBox()
+                            .Type(DateBoxType.Date)
+                            .DisplayFormat("dd/MM/yyyy")
+                            .UseMaskBehavior(true)
+                            .Placeholder("dd/mm/yyyy")
+                            .Label("Ngày tháng năm sinh").LabelMode(EditorLabelMode.Floating)
+                            .ElementAttr("class", "required-validation").ShowClearButton(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                        //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                            //.DisplayExpr("PayModeName")
+                            //.ValueExpr("PayModeID")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Loại giấy tờ tùy thân").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Số giấy tờ tùy thân").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(15).ShowClearButton(true))
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                        //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                            //.DisplayExpr("PayModeName")
+                            //.ValueExpr("PayModeID")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Quốc tịch").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetRelationshipList"))
+                            .DisplayExpr("Name")
+                            .ValueExpr("Code")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Mối quan hệ với NDBH").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().NumberBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Tỉ lệ thụ hưởng (%)").LabelMode(EditorLabelMode.Floating)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

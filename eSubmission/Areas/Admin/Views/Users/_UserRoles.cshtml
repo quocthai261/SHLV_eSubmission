@@ -1,0 +1,50 @@
+﻿@using eSubmission.Models
+@model eSubmission.Areas.Admin.Models.UserDetailViewModel 
+
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100">
+                <div class="card-body py-3">
+                    @(Html.DevExtreme().DataGrid()
+                        .ID("gridContainer")
+                        .DataSource(d => d.WebApi()
+                        .RouteName("Admin")
+                        .Controller("Users")
+                        .LoadAction("GetRolesForUser")
+                        .Key("RoleID")
+                        )
+                        .ShowBorders(true)
+                        .Columns(columns =>
+                        {
+                            columns.Add().DataField(nameof(SysRolesModel.RoleID)).Caption("Role ID").Visible(false).Width(50);
+                            columns.Add().DataField(nameof(SysRolesModel.Code)).Caption("Mã vai trò").Alignment(HorizontalAlignment.Center).AllowEditing(false).MinWidth(100);
+                            columns.Add().DataField(nameof(SysRolesModel.Name)).Caption("Tên vai trò").Alignment(HorizontalAlignment.Center).AllowEditing(false);
+                        })
+                        .AllowColumnResizing(true)
+                        .ColumnAutoWidth(true)
+                        .ColumnMinWidth(50)
+                        .ShowRowLines(true)
+                        .FilterRow(f => f.Visible(true))
+                        .HeaderFilter(f => f.Visible(false))
+                        .GroupPanel(p => p.Visible(false))
+                        .Grouping(g => g.AutoExpandAll(false))
+                        .RemoteOperations(false)
+                        .Paging(paging => paging.PageSize(5))
+                        .Pager(pager =>
+                        {
+                            pager.ShowPageSizeSelector(true);
+                            pager.AllowedPageSizes(new[] { 5, 10, 20 });
+                            pager.ShowInfo(true);
+                        })
+                        .Selection(s => s.Mode(SelectionMode.Multiple))
+                        .SelectedRowKeys(@Model?.RoleIDs)
+                        .OnSelectionChanged("onSelectedChangedRole")
+                        )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

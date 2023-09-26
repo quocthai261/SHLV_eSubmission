@@ -1,0 +1,38 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+@await Html.PartialAsync("CusDetailGeneral")
+
+<script>
+    function onBackToCustomerListClicked() {
+        location.href = '@Url.Action("Index", "Customer", new { area = "Functions" })';
+    }
+    
+    function onSaveToCustomerClicked() {
+        notify("Cập nhật dữ liệu thành công", "success");
+
+        location.href = '@Url.Action("Index", "Customer", new { area = "Functions" })';
+    }    
+    
+    function onProgressBarClicked(step) {
+        $.ajax({
+            url: '@Url.Action("StepPartialView", "Customer", new { area = "Functions" })',
+            type: 'POST',
+            data: {
+                param: step
+            },
+            async: true,
+            success: function (result) {
+                $('#partialViewStep').html(result);
+            },
+        });
+    }
+</script>

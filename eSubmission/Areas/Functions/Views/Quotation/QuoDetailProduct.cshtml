@@ -1,0 +1,111 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">
+        Bảng minh họa
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <strong>Chọn sản phẩm</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar five-step">
+                <li class="active" onclick="onProgressBarClicked('QuoDetailProduct')">Chọn sản phẩm</li>
+                <li onclick="onProgressBarClicked('QuoDetailPolicyOwner')">Bên mua bảo hiểm</li>
+                <li onclick="onProgressBarClicked('QuoDetailLifeAssured')">Người được bảo hiểm</li>
+                <li onclick="onProgressBarClicked('QuoDetailProductInfomation')">Thông tin sản phẩm</li>
+                <li onclick="onProgressBarClicked('QuoDetailInformation')">Thông tin chi tiết</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onBackToQuotationListClicked()"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('QuoDetailPolicyOwner')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Sản phẩm chính</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        <div class="card card-product">
+                            <img src="/images/Product_Image/credit-care.png" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Shinhan – Credit Care</h5>
+                            </div>
+                        </div>
+                        <div class="card card-product">
+                            <img src="/images/Product_Image/credir-care-plus.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Shinhan – Credit Care Plus</h5>
+                            </div>
+                        </div>
+                        <div class="card card-product">
+                            <img src="/images/Product_Image/song-khoe.png" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Shinhan – Sống Khỏe</h5>
+                            </div>
+                        </div>
+                        <div class="card card-product">
+                            <img src="/images/Product_Image/tam-an.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Shinhan – Tâm An</h5>
+                            </div>
+                        </div>
+                        <div class="card card-product">
+                            <img src="/images/Product_Image/thanh-tai.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Shinhan – Thành Tài</h5>
+                            </div>
+                        </div>
+                        <div class="card card-product">
+                            <img src="/images/Product_Image/tuong-lai.jpg" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Shinhan – Tương Lai</h5>
+                            </div>
+                        </div>
+                        <div class="card card-product">
+                            <img src="/images/Product_Image/vui-song.png" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Shinhan – Vui Sống</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Loại định kỳ đóng phí</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse02">
+                    <div class="row">
+                        <div class="card card-product">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Đóng Phí Định Kỳ</h5>
+                            </div>
+                        </div>
+                        <div class="card card-product">
+                            <div class="card-body">
+                                <h5 class="card-title-product">Đóng Phí Một Lần</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

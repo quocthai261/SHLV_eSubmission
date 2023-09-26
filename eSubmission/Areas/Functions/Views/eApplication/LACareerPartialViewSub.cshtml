@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+        <div class="card card-body form-control-ui">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                        //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                            //.DisplayExpr("PayModeName")
+                            //.ValueExpr("PayModeID")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Nghề nghiệp/Chức vụ").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                        //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                            //.DisplayExpr("PayModeName")
+                            //.ValueExpr("PayModeID")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Nhóm nghề nghiệp").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Chi tiết công việc").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(200).ShowClearButton(true))
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().NumberBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Thu nhập bình quân").LabelMode(EditorLabelMode.Floating)
+                            .Min(0).Max(99999999999).ShowClearButton(true))
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .Label("Công ty làm việc").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(100).ShowClearButton(true))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

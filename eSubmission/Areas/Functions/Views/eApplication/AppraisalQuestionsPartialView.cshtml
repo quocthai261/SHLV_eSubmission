@@ -1,0 +1,1349 @@
+﻿<style>
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+</style>
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">
+        Hồ sơ yêu cầu bảo hiểm
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <strong>Bên mua bảo hiểm</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Shinhan - Vui Sống</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        @* Câu 1 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 1. Chiều cao và cân nặng </p>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Chiều cao").LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(999).Value(null))
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Cân nặng").LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(999).Format("#0.##").Value(null))
+                            </div>
+                        </div>
+                        @* Câu 2 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 2. Quý khách có tiền sử sinh sớm trước 36 tuần thai không? </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Tuần thai lúc sinh").LabelMode(EditorLabelMode.Floating)
+                                    .Min(10).Max(35).Value(null))
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().NumberBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Cân nặng lúc sinh").LabelMode(EditorLabelMode.Floating)
+                                    .Min(0).Max(999).Format("#0.#").Value(null))
+                            </div>
+                        </div>
+                        @* Câu 3 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 3. Quý khách có đang tham gia hoặc dự định tham gia các hoạt động nguy hiểm như nhảy dù, thể thao trên không, leo núi, săn bắn, đua xe, đua ngựa, lặn, hoạt động hàng không, trừ khi là hành khách hoặc phi hành đoàn trên chuyến bay thương mại không? </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                <div id="exTab2">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#1" data-toggle="tab">Lặn</a>
+                                        </li>
+                                        <li>
+                                            <a href="#2" data-toggle="tab">Nhảy dù, thể thao trên không</a>
+                                        </li>
+                                        <li>
+                                            <a href="#3" data-toggle="tab">Hoạt động hàng không</a>
+                                        </li>
+                                        <li>
+                                            <a href="#4" data-toggle="tab">Leo núi</a>
+                                        </li>
+                                        <li>
+                                            <a href="#5" data-toggle="tab">Săn bắn</a>
+                                        </li>
+                                        <li>
+                                            <a href="#6" data-toggle="tab">Đua xe, đua ngựa</a>
+                                        </li>
+                                    </ul>
+
+                                    <div class="tab-content ">
+                                        <div class="tab-pane active" id="1">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> a. Chi tiết loại hình, mục đích.  </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> b. Có tham gia các khóa học đào tạo không? Nếu Có, cho biết thời gian tham gia và giấy chứng nhận?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> c. Có là thành viên trong câu lạc bộ hoặc đội nhóm không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> d. Có sử dụng dụng cụ, thiết bị hỗ trợ không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> e. Lần lặn đầu tiên khi nào?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> f. Lần lặn gần nhất: thời gian, địa điểm, cá nhân hay đội nhóm, mục đích?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> g. Tần suất (lần/năm)? Độ sâu trung bình bao nhiêu?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> h. Đã từng hoặc đang gặp tai nạn, chấn thương khi tham gia không? Nếu Có, cho biết vị trí chấn thương, phương pháp điều trị, di chứng và tình trạng hiện tại?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="2">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> a. Chi tiết loại hình, mục đích.  </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> b. Có tham gia các khóa học đào tạo không? Nếu Có, cho biết thời gian tham gia và giấy chứng nhận?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> c. Có là thành viên trong câu lạc bộ hoặc đội nhóm không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> d. Có sử dụng dụng cụ, thiết bị hỗ trợ không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> e. Lần tham gia đầu tiên khi nào?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> f. Lần tham gia gần nhất: thời gian, địa điểm, cá nhân hay đội nhóm, mục đích?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> g. Tần suất (lần/năm)? Độ cao trung bình bao nhiêu?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> h. Đã từng hoặc đang gặp tai nạn, chấn thương khi tham gia không? Nếu Có, cho biết vị trí chấn thương, phương pháp điều trị, di chứng và tình trạng hiện tại?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="3">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> a. Chi tiết loại hình, mục đích.  </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> b. Có tham gia các khóa học đào tạo không? Nếu Có, cho biết thời gian tham gia và giấy chứng nhận?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> c. Có là thành viên trong câu lạc bộ hoặc đội nhóm không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> d. Tần suất (lần/năm)? Thời gian và địa điểm bay dài nhất? Loại phương tiện sử dụng?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> e. Đã từng hoặc đang gặp tai nạn, chấn thương khi tham gia không? Nếu Có, cho biết vị trí chấn thương, phương pháp điều trị, di chứng và tình trạng hiện tại?  </p>
+                                            </div>                                            
+                                        </div>
+                                        <div class="tab-pane" id="4">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> a. Chi tiết loại hình, mục đích.  </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> b. Có tham gia các khóa học đào tạo không? Nếu Có, cho biết thời gian tham gia và giấy chứng nhận?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> c. Có là thành viên trong câu lạc bộ hoặc đội nhóm không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> d. Có sử dụng dụng cụ, thiết bị hỗ trợ không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> e. Lần tham gia gần nhất: thời gian, địa điểm, cá nhân hay đội nhóm, mục đích?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> f. Tần suất (lần/năm)? </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> g. Đã từng hoặc đang gặp tai nạn, chấn thương khi tham gia không? Nếu Có, cho biết vị trí chấn thương, phương pháp điều trị, di chứng và tình trạng hiện tại?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="5">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> a. Chi tiết loại hình, mục đích.  </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> b. Có tham gia các khóa học đào tạo không? Nếu Có, cho biết thời gian tham gia và giấy chứng nhận?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> c. Có là thành viên trong câu lạc bộ hoặc đội nhóm không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> d. Có sử dụng dụng cụ, thiết bị hỗ trợ không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> e. Lần tham gia gần nhất: thời gian, địa điểm, cá nhân hay đội nhóm, mục đích?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> f. Tần suất (lần/năm)? </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> g. Đã từng hoặc đang gặp tai nạn, chấn thương khi tham gia không? Nếu Có, cho biết vị trí chấn thương, phương pháp điều trị, di chứng và tình trạng hiện tại?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="6">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> a. Chi tiết loại hình, mục đích.  </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> b. Có tham gia các khóa học đào tạo không? Nếu Có, cho biết thời gian tham gia và giấy chứng nhận?   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> c. Có là thành viên trong câu lạc bộ hoặc đội nhóm không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> d. Có sử dụng dụng cụ, thiết bị hỗ trợ không? Nếu Có, vui lòng ghi chi tiết   </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> e. Lần tham gia gần nhất: thời gian, địa điểm, cá nhân hay đội nhóm, mục đích?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> f. Tần suất (lần/năm)? Tốc độ cao nhất bao nhiêu?</p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <p class="form-title-question-sub"> g. Đã từng hoặc đang gặp tai nạn, chấn thương khi tham gia không? Nếu Có, cho biết vị trí chấn thương, phương pháp điều trị, di chứng và tình trạng hiện tại?    </p>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    @(Html.DevExtreme().TextBox().MaxLength(2000))
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Câu 4 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 4. Quý khách có dự định đi nước ngoài trên 3 tháng liên tục không? </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                        .ID("gridQuestion04")
+                                        @* .DataSource(d => d.WebApi()
+                                        .Area("Functions")
+                                        .Controller("Customer")
+                                        .LoadAction("GetCustomerList")
+                                        .Key("CustomerID")
+                                        ) *@
+                                        .ShowBorders(true)
+                                        .Editing(e => e
+                                        .Mode(GridEditMode.Batch)
+                                        .AllowAdding(true)
+                                        .AllowDeleting(true)
+                                        .AllowUpdating(true)
+                                        )
+                                        .Columns(columns =>
+                                        {
+                                            columns.Add().Caption("NĐBH - T.phố/Quốc Gia");
+                                            columns.Add().Caption("Thời gian cư trú");
+                                            columns.Add().Caption("Mục đích cư trú");
+                                            columns.Add().Caption("Ngày dự định đi");
+                                        })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 5 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 5. Tiền sử sức khỏe gia đình: Cha/Mẹ/Anh chị em ruột của Quý khách có được chẩn đoán bệnh tim, tăng huyết áp, đột quỵ, ung thư, thận đa nang, bệnh gan, viêm gan, bệnh di truyền, bệnh về máu không? </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion05")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Mối quan hệ");
+                                        columns.Add().Caption("Chẩn đoán bệnh");
+                                        columns.Add().Caption("Chi tiết bệnh");
+                                        columns.Add().Caption("Tuổi phát hiện");
+                                        columns.Add().Caption("Tuổi");
+                                        columns.Add().Caption("Tuổi qua đời");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 6 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 6. Thói quen sử dụng rượu bia </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            @(Html.DevExtreme().RadioGroup()
+                                .Items(new[] { "Chưa bao giờ uống rượu bia", "Uống ít hơn hoặc bằng (<=) 16 chai (lon) bia/tuần hoặc 200ml rượu/tuần", "Uống hơn 16 chai (lon) bia hoặc 200ml rượu/tuần" })
+                                .Value("Chưa bao giờ uống rượu bia")
+                                )
+                        </div>
+                        @* Câu 7 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 7. Thói quen sử dụng thuốc lá </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            @(Html.DevExtreme().RadioGroup()
+                                .Items(new[] { "Không hút thuốc", "Hút ít hơn hoặc bằng (<=) 20 điếu/ngày", "Hút nhiều hơn 20 điếu/ngày" })
+                                .Value("Không hút thuốc")
+                                )
+                        </div>
+                        @* Câu 8a *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 8a. Tăng huyết áp? </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(false))
+                            </div>
+                        </div>
+                        @* Câu 8b *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 8b. Đau ngực, đánh trống ngực, bệnh van tim, rối loạn nhịp tim, bệnh mạch vành, thiếu máu cơ tim, nhồi máu cơ tim, bệnh tim thấp, suy tim, dị dạng mạch máu, xơ vữa mạch, viêm tắc động tĩnh mạch hay bệnh lý mạch máu, bệnh lý tim mạch khác? </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion08")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 9 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 9. Suy hô hấp, khó thở, ho ra máu, khàn tiếng, ho kéo dài trên 7 ngày, viêm xoang, viêm phế quản, viêm phổi, lao phổi, bệnh phổi tắc nghẽn mãn tính (COPD), áp xe phổi, tràn dịch màng phổi, tràn khí màng phổi, hen phế quản (suyễn), giãn phế quản, tâm phế mạn hay bệnh khác của hệ hô hấp?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion09")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 10a *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 10a. Viêm/loét/xuất huyết tiêu hóa/dạ dày, bệnh dạ dày/túi mật/đường mật/tụy, táo bón, khó tiêu thường xuyên, biếng ăn hay bệnh khác của hệ tiêu hóa?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(false))
+                            </div>
+                        </div>
+                        @* Câu 10b *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 10b. Vàng da, gan to, gan nhiễm mỡ, cổ trướng, khó nuốt, nuốt nghẹn, viêm gan do rượu, viêm gan siêu vi B, viêm gan siêu vi C, xơ gan, bệnh trĩ?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion10")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 11a *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 11a. Động kinh?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        @* Câu 11b *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 11b. Rối loạn thị giác, rối loạn thính giác, khiếm khuyết phát âm, viêm não, viêm màng não, đau đầu, chóng mặt, rối loạn tiền đình, rối loạn tuần hoàn não, thiếu máu não, nhồi máu não, chảy máu não, đột quỵ, co giật, hôn mê, liệt, sa sút trí tuệ (bệnh Alzheimer), run tay chân (bệnh Parkinson), hay bệnh khác của não và hệ thần kinh?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion11")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 12 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 12. Lo âu, trầm cảm, căng thẳng kéo dài, mệt mỏi, bứt rứt, rối loạn tâm lý, cảm xúc hay các bệnh khác về tâm thần?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion12")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 13a *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 13a. Bệnh đái tháo đường, đái tháo đường thai kỳ?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(false))
+                            </div>
+                        </div>
+                        @* Câu 13b *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 13b. Sốt kéo dài trên 7 ngày, tăng hoặc sút cân bất thường (>5kg trong vòng 1 năm), các rối loạn tại tuyến yên, tuyến giáp, tuyến thượng thận hay các bệnh khác của hệ nội tiết?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion13")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 14 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 14. Dị dạng, tàn tật hoặc cắt bỏ chi, bệnh lao các cơ quan, bệnh Gout (Gút – thống phong), loạn dưỡng cơ, đau khớp, cong (vẹo) cột sống, thoát vị đĩa đệm hay rối loạn khác tại cột sống/lưng/cổ/khớp/cơ/xương/dây thần kinh?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion14")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 15a *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 15a. Bệnh ung thư, có khối u, nang, pô-líp (polyp), khối phát triển bất thường, nổi hạch bất thường?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(false))
+                            </div>
+                        </div>
+                        @* Câu 15b *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 15b. Ngộ độc, nhiễm độc hóa chất, bỏng, bệnh phong, vẩy nến, bệnh xơ cứng bì, bệnh Lupus ban đỏ, các rối loạn dị ứng miễn dịch?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion15")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 16 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 16. Bệnh bẩm sinh, tím tái lúc sinh, chậm phát triển tâm thần/vận động, tự kỷ, hội chứng Đao (Down), thiếu máu, máu khó đông, bệnh bạch cầu, suy tủy xương hay bệnh khác về máu, tủy xương và hệ hạch bạch huyết?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion16")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 17 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 17. Nước tiểu có đường/có đạm, phù, tiểu máu, tiểu mủ, bí tiểu, tiểu không tự chủ, sỏi/viêm/dị dạng đường tiết niệu/thận, viêm cầu thận, hội chứng thận hư, suy thận, các rối loạn tại tuyến tiền liệt, rối loạn kinh nguyệt hay bệnh khác của hệ tiết niệu, hệ sinh sản?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion17")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 18 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 18. Bệnh lây truyền qua đường tình dục, nhiễm HIV/AIDS, các tình trạng hoặc rối loạn liên quan đến AIDS hoặc đã từng làm xét nghiệm HIV?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion18")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 19 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 19. Có sử dụng ma túy hoặc các chất gây nghiện không?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Chi tiết").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(1000))
+                            </div>
+                        </div>
+                        @* Câu 20 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 20. Trong vòng 3 năm qua, Quý khách có được khám, chẩn đoán, điều trị hoặc có các bệnh, triệu chứng chưa được nêu ở trên?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion20")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 21 *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 21. Trong vòng 3 năm qua, Quý khách có làm các xét nghiệm như X-quang, siêu âm, điện tim, điện não, chụp cắp lớp, chụp cộng hưởng từ, thử máu, nội soi hay sinh thiết?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion21")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện");
+                                        columns.Add().Caption("Kết quả");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                        @* Câu 22a *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 22a. Quý khách hiện có đang mang thai không?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(false))
+                            </div>
+                        </div>
+                        @* Câu 22b *@
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <p class="form-title-question"> 22b. Quý khách có bất thường tại kết quả phết tế bào cổ tử cung (pap smear), nhũ ảnh, có bị cắt tử cung, bệnh lý hoặc rối loạn liên quan đến buồng trứng, tuyến vú, tử cung và cổ tử cung không?  </p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                    .Width(80).Value(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                    .ID("gridQuestion22")
+                                    @* .DataSource(d => d.WebApi()
+                                .Area("Functions")
+                                .Controller("Customer")
+                                .LoadAction("GetCustomerList")
+                                .Key("CustomerID")
+                                ) *@
+                                    .ShowBorders(true)
+                                    .Editing(e => e
+                                    .Mode(GridEditMode.Batch)
+                                    .AllowAdding(true)
+                                    .AllowDeleting(true)
+                                    .AllowUpdating(true)
+                                    )
+                                    .Columns(columns =>
+                                    {
+                                        columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                        columns.Add().Caption("Triệu chứng");
+                                        columns.Add().Caption("Chuẩn đoán");
+                                        columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                        columns.Add().Caption("Điều trị ");
+                                    })
+                                    .ColumnHidingEnabled(false)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function question02ValueChanged(e) {
+        const stateLabel = e.value ? "CÓ" : "KHÔNG";
+        DevExpress.ui.notify(`The component is switched ${stateLabel}`);
+    }
+</script>

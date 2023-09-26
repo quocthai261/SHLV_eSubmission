@@ -1,0 +1,26 @@
+﻿@{
+    if (ViewBag.Step == "QuoDetailProduct")
+    {
+        @await Html.PartialAsync("QuoDetailProduct")
+    }
+    else if (ViewBag.Step == "QuoDetailPolicyOwner")
+    {
+        @await Html.PartialAsync("QuoDetailPolicyOwner")
+    }
+    else if (ViewBag.Step == "QuoDetailLifeAssured")
+    {
+        @await Html.PartialAsync("QuoDetailLifeAssured")
+    }
+    else if (ViewBag.Step == "QuoDetailProductInfomation")
+    {
+        @await Html.PartialAsync("QuoDetailProductInfomation")
+    }
+    else if (ViewBag.Step == "QuoDetailInformation")
+    {
+        @await Html.PartialAsync("QuoDetailInformation")
+    }
+    else
+    {
+        @await Html.PartialAsync("QuoDetailProduct")
+    }
+}

@@ -1,0 +1,14 @@
+﻿@{
+    if (ViewBag.Step == "Index")
+    {
+        @await Html.PartialAsync("Index")
+    }
+    else if (ViewBag.Step == "PaidList")
+    {
+        @await Html.PartialAsync("PaidList")
+    }
+    else
+    {
+        @await Html.PartialAsync("Index")
+    }
+}

@@ -1,0 +1,163 @@
+﻿<div class="row">
+    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+        <div class="card card-body form-control-ui">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Họ").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Tên đệm").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .ElementAttr("class", "required-validation")
+                            .Label("Tên").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetGenderList"))
+                            .DisplayExpr("GenderName")
+                            .ValueExpr("GenderCode")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Giới tính").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().DateBox()
+                            .Type(DateBoxType.Date)
+                            .DisplayFormat("dd/MM/yyyy")
+                            .UseMaskBehavior(true)
+                            .Placeholder("dd/mm/yyyy")
+                            .Label("Ngày tháng năm sinh").LabelMode(EditorLabelMode.Floating)
+                            .ElementAttr("class", "required-validation").ShowClearButton(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetMarriageStatusList"))
+                            .DisplayExpr("MarriageName")
+                            .ValueExpr("MarriageCode")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Tình trạng hôn nhân").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetCityList"))
+                            .DisplayExpr("CityName")
+                            .ValueExpr("CityCode")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Nơi sinh").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetNationalityList"))
+                            .DisplayExpr("Name")
+                            .ValueExpr("Code")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Quốc tịch").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .Label("Quốc tịch khác (Nếu có)").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetCertiTypeList"))
+                            .DisplayExpr("CertiTypeName")
+                            .ValueExpr("CertiTypeCode")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Loại giấy tờ tùy thân").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().CheckBox().Value(true).IconSize(18).ElementAttr("aria-label", "Custom size")
+                            .Text("Có số giấy tờ tùy thân"))
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().TextBox()
+                            .Label("Số giấy tờ tùy thân").LabelMode(EditorLabelMode.Floating)
+                            .MaxLength(50).ShowClearButton(true)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            .ReadOnly(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().DateBox()
+                            .Type(DateBoxType.Date)
+                            .DisplayFormat("dd/MM/yyyy")
+                            .UseMaskBehavior(true)
+                            .Placeholder("dd/mm/yyyy")
+                            .Label("Ngày cấp").LabelMode(EditorLabelMode.Floating)
+                            .ElementAttr("class", "required-validation").ShowClearButton(true)
+                            )
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        @(Html.DevExtreme().SelectBox()
+                            .DataSource(d => d.WebApi().Area("Functions").Controller("eApplication").LoadAction("GetCertiIssuedPlaceList"))
+                            .DisplayExpr("Name")
+                            .ValueExpr("Code")
+                            .Placeholder("Chọn")
+                            .SearchEnabled(true).Label("Nơi cấp").LabelMode(EditorLabelMode.Floating)
+                            .ShowClearButton(true).ElementAttr("class", "required-validation")
+                            )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

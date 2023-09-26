@@ -1,0 +1,104 @@
+﻿@using eSubmission.Models
+
+<div class="container-fluid p-0">  
+
+    <h1 class="h4 mb-3 form-title"><strong>Quản lý vai trò người dùng</strong></h1>  
+
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-header" style="justify-content:space-between">
+                    <h5 class="card-title mb-0">Filter</h5> 
+                    <a 
+                        asp-area="Admin" 
+                        asp-controller="Roles" 
+                        asp-action="Create" 
+                        style="display:flex;justify-content:center;align-items:center" 
+                        class="btn btn-purple-invert btn-filter"
+                     >
+                        <span class="glyphicon glyphicon-plus"></span> Thêm mới
+                    </a>
+                </div>
+                <div class="card-body py-3">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label("Tên vai trò").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .Label("Mã vai trò").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(100).ShowClearButton(true))
+                            </div>
+                        </div>                      
+                    </div>
+                    <div class="row button-search-row">
+                        <div class="col-md-12">
+                            <button class="btn btn-purple-style" type="submit">Xóa</button>
+                            <button class="btn btn-purple-style" type="submit">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100 form-control-ui">
+                <div class="card-body py-3">
+                    @(Html.DevExtreme().DataGrid()
+                            .ID("gridUsers")
+                            .DataSource(d => d.WebApi()
+                            .RouteName("Admin")
+                            .Controller("Roles")
+                            .LoadAction("GetRoleList")
+                            .Key("RoleID")
+                            )
+                            .ShowBorders(true)
+                            .Selection(s => s.Mode(SelectionMode.Single))
+                            .Export(e => e.Enabled(true).AllowExportSelectedData(false)).OnExporting("exportingGridRoles")
+                            .Columns(columns =>
+                            {
+                                columns.Add().DataField(nameof(SysRolesModel.RoleID)).Caption("Role ID").Alignment(HorizontalAlignment.Center);
+                                columns.Add().DataField(nameof(SysRolesModel.Code)).Caption("Mã vai trò").Alignment(HorizontalAlignment.Center);
+                                columns.Add().DataField(nameof(SysRolesModel.Name)).Caption("Tên vai trò").Alignment(HorizontalAlignment.Center);
+                            })
+                        .ColumnHidingEnabled(true)
+                        .AllowColumnResizing(true)
+                        .ColumnAutoWidth(true)
+                        .ColumnMinWidth(50)
+                        .ShowRowLines(true)
+                        .FilterRow(f => f.Visible(true))
+                        .HeaderFilter(f => f.Visible(false))
+                        .GroupPanel(p => p.Visible(false))
+                        .Grouping(g => g.AutoExpandAll(false))
+                        .RemoteOperations(false)
+                        )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function exportingGridRoles(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Roles');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'RoleList.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+</script>

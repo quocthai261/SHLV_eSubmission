@@ -1,0 +1,196 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">Thông tin khách hàng 
+        <i class="fa fa-caret-right" aria-hidden="true"></i> 
+        <strong>Cá nhân</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar six-step">
+                <li class="active" onclick="onProgressBarClicked('CusDetailGeneral')">Cá nhân</li>
+                <li onclick="onProgressBarClicked('CusDetailJob')">Nghề nghiệp</li>
+                <li onclick="onProgressBarClicked('CusDetailContact')">Liên hệ</li>
+                <li onclick="onProgressBarClicked('CusDetailAddress')">Địa chỉ</li>
+                <li onclick="onProgressBarClicked('CusDetailFatca')">FATCA</li>
+                <li onclick="onProgressBarClicked('CusDetailConfirm')">Xác nhận</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onBackToCustomerListClicked()"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('CusDetailJob')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Thông tin cơ bản</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse01">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Họ và tên").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(50).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                    //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Giới tính").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DateBox()
+                                    .Type(DateBoxType.Date)
+                                    .DisplayFormat("dd/MM/yyyy")
+                                    .UseMaskBehavior(true)
+                                    .Placeholder("dd/mm/yyyy")
+                                    .Label("Ngày tháng năm sinh").LabelMode(EditorLabelMode.Floating)
+                                    .ElementAttr("class", "required-validation").ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Loại giấy tờ tùy thân").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().CheckBox().Value(true).IconSize(18).ElementAttr("aria-label", "Custom size")
+                                    .Text("Có số định danh cá nhân"))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Số định danh cá nhân").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(12).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Số giấy khai sinh").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(4).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().TextBox()
+                                    .ElementAttr("class", "required-validation")
+                                    .Label("Số giấy tờ tùy thân").LabelMode(EditorLabelMode.Floating)
+                                    .MaxLength(15).ShowClearButton(true))
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DateBox()
+                                    .Type(DateBoxType.Date)
+                                    .DisplayFormat("dd/MM/yyyy")
+                                    .UseMaskBehavior(true)
+                                    .Placeholder("dd/mm/yyyy")
+                                    .Label("Ngày cấp").LabelMode(EditorLabelMode.Floating)
+                                    .ElementAttr("class", "required-validation").ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Nơi cấp").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Tình trạng hôn nhân").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Nơi sinh").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Quốc tịch").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true).ElementAttr("class", "required-validation")
+                                    )
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="form-group">
+                                @(Html.DevExtreme().SelectBox()
+                                //.DataSource(d => d.WebApi().Area("Functions").Controller("Product").LoadAction("GetPaymodeList"))
+                                    //.DisplayExpr("PayModeName")
+                                    //.ValueExpr("PayModeID")
+                                    .Placeholder("Chọn")
+                                    .SearchEnabled(true).Label("Quốc tịch khác").LabelMode(EditorLabelMode.Floating)
+                                    .ShowClearButton(true)
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

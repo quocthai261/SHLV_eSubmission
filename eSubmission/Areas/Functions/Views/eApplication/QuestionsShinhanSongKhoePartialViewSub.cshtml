@@ -1,0 +1,235 @@
+﻿<style>
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+        <div class="card card-body form-control-ui">
+            <p>
+                <a class="form-title" data-bs-toggle="collapse" href="#collapse01" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <strong>Shinhan - Sống Khỏe</strong>
+                </a>
+            </p>
+            <div class="collapse show" id="collapse01">
+                <div class="row">                    
+                    @* Câu 1 *@
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <p class="form-title-question"> 1. Trong 6 tháng qua, Quý khách có từng được bác sĩ hoặc chuyên gia y tế tư vấn kiểm tra y tế, điều tra, chụp cắp lớp, sinh thiết, xét nghiệm chẩn đoán khác hoặc đang điều trị?  </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                .Width(80).Value(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        <div class="form-group">
+                            @(Html.DevExtreme().DataGrid()
+                                .ID("gridQuestion1")
+                                @* .DataSource(d => d.WebApi()
+                            .Area("Functions")
+                            .Controller("Customer")
+                            .LoadAction("GetCustomerList")
+                            .Key("CustomerID")
+                            ) *@
+                                .ShowBorders(true)
+                                .Editing(e => e
+                                .Mode(GridEditMode.Batch)
+                                .AllowAdding(true)
+                                .AllowDeleting(true)
+                                .AllowUpdating(true)
+                                )
+                                .Columns(columns =>
+                                {
+                                    columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                    columns.Add().Caption("Triệu chứng");
+                                    columns.Add().Caption("Chuẩn đoán");
+                                    columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                    columns.Add().Caption("Điều trị ");
+                                })
+                                .ColumnHidingEnabled(false)
+                                .AllowColumnResizing(true)
+                                .ColumnAutoWidth(true)
+                                .ColumnMinWidth(50)
+                                .ShowRowLines(true)
+                                .FilterRow(f => f.Visible(false))
+                                .HeaderFilter(f => f.Visible(false))
+                                .GroupPanel(p => p.Visible(false))
+                                .Grouping(g => g.AutoExpandAll(false))
+                                .RemoteOperations(false)
+                                )
+                        </div>
+                    </div>
+                    @* Câu 2 *@
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <p class="form-title-question"> 2. Trong 2 năm qua, Quý khách có từng nằm viện ít nhất 3 ngày, trải qua phẫu thuật, hoặc đang sử dụng thuốc hoặc điều trị (không bao gồm triệu chứng cúm, ho) trong ít nhất 2 tuần?  </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                .Width(80).Value(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        <div class="form-group">
+                            @(Html.DevExtreme().DataGrid()
+                                .ID("gridQuestion2")
+                                @* .DataSource(d => d.WebApi()
+                            .Area("Functions")
+                            .Controller("Customer")
+                            .LoadAction("GetCustomerList")
+                            .Key("CustomerID")
+                            ) *@
+                                .ShowBorders(true)
+                                .Editing(e => e
+                                .Mode(GridEditMode.Batch)
+                                .AllowAdding(true)
+                                .AllowDeleting(true)
+                                .AllowUpdating(true)
+                                )
+                                .Columns(columns =>
+                                {
+                                    columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                    columns.Add().Caption("Triệu chứng");
+                                    columns.Add().Caption("Chuẩn đoán");
+                                    columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                    columns.Add().Caption("Điều trị ");
+                                })
+                                .ColumnHidingEnabled(false)
+                                .AllowColumnResizing(true)
+                                .ColumnAutoWidth(true)
+                                .ColumnMinWidth(50)
+                                .ShowRowLines(true)
+                                .FilterRow(f => f.Visible(false))
+                                .HeaderFilter(f => f.Visible(false))
+                                .GroupPanel(p => p.Visible(false))
+                                .Grouping(g => g.AutoExpandAll(false))
+                                .RemoteOperations(false)
+                                )
+                        </div>
+                    </div>
+                    @* Câu 3 *@
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <p class="form-title-question"> 3. Quý khách đã từng hoặc đang được chẩn đoán ung thư, ung thư biểu mô tại chỗ, phát triển mô bất thường, bệnh (tiền) tiểu đường, cơn thiếu máu não thoáng qua, đột quỵ, bệnh tim/phổi/gan/thận, bệnh tiêu hóa, bệnh tiết niệu, HIV/AIDS, bệnh về mắt/tai hoặc khuyết tật về thể chất?  </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                .Width(80).Value(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        <div class="form-group">
+                            @(Html.DevExtreme().DataGrid()
+                                .ID("gridQuestion3")
+                                @* .DataSource(d => d.WebApi()
+                            .Area("Functions")
+                            .Controller("Customer")
+                            .LoadAction("GetCustomerList")
+                            .Key("CustomerID")
+                            ) *@
+                                .ShowBorders(true)
+                                .Editing(e => e
+                                .Mode(GridEditMode.Batch)
+                                .AllowAdding(true)
+                                .AllowDeleting(true)
+                                .AllowUpdating(true)
+                                )
+                                .Columns(columns =>
+                                {
+                                    columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                    columns.Add().Caption("Triệu chứng");
+                                    columns.Add().Caption("Chuẩn đoán");
+                                    columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                    columns.Add().Caption("Điều trị ");
+                                })
+                                .ColumnHidingEnabled(false)
+                                .AllowColumnResizing(true)
+                                .ColumnAutoWidth(true)
+                                .ColumnMinWidth(50)
+                                .ShowRowLines(true)
+                                .FilterRow(f => f.Visible(false))
+                                .HeaderFilter(f => f.Visible(false))
+                                .GroupPanel(p => p.Visible(false))
+                                .Grouping(g => g.AutoExpandAll(false))
+                                .RemoteOperations(false)
+                                )
+                        </div>
+                    </div>
+                    @* Câu 4 *@
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <p class="form-title-question"> Quý khách đã từng hoặc hiện đang được chẩn đoán viêm khớp, bệnh về máu, rối loạn hệ thống miễn dịch hoặc bệnh bẩm sinh?  </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            @(Html.DevExtreme().Switch().SwitchedOffText("Không").SwitchedOnText("Có")
+                                .Width(80).Value(true))
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        <div class="form-group">
+                            @(Html.DevExtreme().DataGrid()
+                                .ID("gridQuestion4")
+                                @* .DataSource(d => d.WebApi()
+                            .Area("Functions")
+                            .Controller("Customer")
+                            .LoadAction("GetCustomerList")
+                            .Key("CustomerID")
+                            ) *@
+                                .ShowBorders(true)
+                                .Editing(e => e
+                                .Mode(GridEditMode.Batch)
+                                .AllowAdding(true)
+                                .AllowDeleting(true)
+                                .AllowUpdating(true)
+                                )
+                                .Columns(columns =>
+                                {
+                                    columns.Add().Caption("NĐBH - Ngày khám bệnh");
+                                    columns.Add().Caption("Triệu chứng");
+                                    columns.Add().Caption("Chuẩn đoán");
+                                    columns.Add().Caption("Xét nghiệm đã thực hiện và kết quả ");
+                                    columns.Add().Caption("Điều trị ");
+                                })
+                                .ColumnHidingEnabled(false)
+                                .AllowColumnResizing(true)
+                                .ColumnAutoWidth(true)
+                                .ColumnMinWidth(50)
+                                .ShowRowLines(true)
+                                .FilterRow(f => f.Visible(false))
+                                .HeaderFilter(f => f.Visible(false))
+                                .GroupPanel(p => p.Visible(false))
+                                .Grouping(g => g.AutoExpandAll(false))
+                                .RemoteOperations(false)
+                                )
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

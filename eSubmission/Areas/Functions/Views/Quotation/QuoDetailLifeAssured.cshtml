@@ -1,0 +1,130 @@
+﻿@using eSubmission.Models
+@using eSubmission.Areas.Functions.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IHtmlLocalizer<CustomerController> HtmlLocalizer
+
+@{
+    var confirmDeleteMessage = String.Format(@HtmlLocalizer["ConfirmDeleteMessage"].Value);
+    var confirmDeleteTitle = String.Format(@HtmlLocalizer["ConfirmDeleteTitle"].Value);
+}
+
+<div class="container-fluid p-0" id="partialViewStep">
+    <h1 class="h5 mb-3 form-title">Bảng minh họa
+        <i class="fa fa-caret-right" aria-hidden="true"></i> 
+        <strong>Người được bảo hiểm</strong>
+    </h1>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <ul class="progressbar five-step">
+                <li class="active" onclick="onProgressBarClicked('QuoDetailProduct')">Chọn sản phẩm</li>
+                <li class="active" onclick="onProgressBarClicked('QuoDetailPolicyOwner')">Bên mua bảo hiểm</li>
+                <li class="active" onclick="onProgressBarClicked('QuoDetailLifeAssured')">Người được bảo hiểm</li>
+                <li onclick="onProgressBarClicked('QuoDetailProductInfomation')">Thông tin sản phẩm</li>
+                <li onclick="onProgressBarClicked('QuoDetailInformation')">Thông tin chi tiết</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card card-body form-control-ui">
+                <div class="row button-right-row">
+                    <div class="col-md-12">
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('QuoDetailProduct')"><span class="glyphicon glyphicon-triangle-left"></span> Trở về</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onPopupChooseCustomerClicked()">Chọn khách hàng</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onPopupAddNewCustomerClicked()">Thêm mới</button>
+                        <button class="btn btn-purple-style" type="submit" onclick="onProgressBarClicked('QuoDetailProductInfomation')">Tiếp theo <span class="glyphicon glyphicon-triangle-right"></span></button>
+                    </div>
+                </div>
+                <p>
+                    <a class="form-title" data-bs-toggle="collapse" href="#collapse02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <strong>Danh sách người được bảo hiểm</strong>
+                    </a>
+                </p>
+                <div class="collapse show" id="collapse02">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="form-group">
+                                @(Html.DevExtreme().DataGrid()
+                                        .ID("gridLifeAssured")
+                                        .DataSource(d => d.WebApi()
+                                        .Area("Functions")
+                                        .Controller("Customer")
+                                        .LoadAction("GetCustomerList")
+                                        )
+                                        .ShowBorders(true)
+                                        .Selection(s => s.Mode(SelectionMode.Single))
+                                        .Editing(editing =>
+                                        {
+                                            editing.Texts(textBuilder =>
+                                        {
+                                            textBuilder.ConfirmDeleteMessage(confirmDeleteMessage);
+                                            textBuilder.ConfirmDeleteTitle(confirmDeleteTitle);
+                                        });
+                                        })
+                                        .Columns(columns =>
+                                        {
+                                            columns.Add().Caption("").Width(115)
+                                        .CellTemplate(@<text>
+                                            <div class="dropdown">
+                                                <a class="dropbtn">Thao tác</a>
+                                                <div class="dropdown-content">
+                                                    <a href="#">
+                                                        Sửa
+                                                    </a>
+                                                    <a href="#" title="Delete">
+                                                        Xóa
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </text>);
+                                            columns.Add().DataField(nameof(CustomerModel.CustomerID)).Visible(false);
+                                            columns.Add().DataField(nameof(CustomerModel.FullName)).Caption("Họ và tên");
+                                            columns.Add().DataField(nameof(CustomerModel.Gender)).Caption("Giới tính").Width(100);
+                                            columns.Add().DataField(nameof(CustomerModel.Birthday)).Caption("Ngày sinh").DataType(GridColumnDataType.DateTime).Format("dd/MM/yyyy  HH:mm").Alignment(HorizontalAlignment.Center).Width(150);
+                                            columns.Add().DataField(nameof(CustomerModel.HasIN)).Caption("Có số định danh").DataType(GridColumnDataType.Boolean).Alignment(HorizontalAlignment.Center).Width(150);
+                                            columns.Add().DataField(nameof(CustomerModel.IdentificationNumber)).Caption("Số định danh").Width(200);
+                                            columns.Add().DataField(nameof(CustomerModel.BirthNumber)).Caption("Số giấy khai sinh").Width(200);
+                                            columns.Add().DataField(nameof(CustomerModel.IdNumber)).Caption("Số giấy tờ tùy thân").Width(200);
+                                            columns.Add().DataField(nameof(CustomerModel.IssuedDate)).Caption("Ngày cấp").DataType(GridColumnDataType.DateTime).Format("dd/MM/yyyy  HH:mm").Alignment(HorizontalAlignment.Center).Width(150);
+                                            columns.Add().DataField(nameof(CustomerModel.IssuedPlace)).Caption("Nơi cấp").DataType(GridColumnDataType.DateTime).Format("dd/MM/yyyy  HH:mm").Alignment(HorizontalAlignment.Center).Width(150);
+                                        })
+                                    .ColumnHidingEnabled(true)
+                                    .AllowColumnResizing(true)
+                                    .ColumnAutoWidth(true)
+                                    .ColumnMinWidth(50)
+                                    .ShowRowLines(true)
+                                    .FilterRow(f => f.Visible(false))
+                                    .HeaderFilter(f => f.Visible(false))
+                                    .GroupPanel(p => p.Visible(false))
+                                    .Grouping(g => g.AutoExpandAll(false))
+                                    .RemoteOperations(false)
+                                    .Paging(paging => paging.PageSize(5))
+                                    .Pager(pager =>
+                                    {
+                                        pager.ShowPageSizeSelector(true);
+                                        pager.AllowedPageSizes(new[] { 5, 10});
+                                        pager.ShowInfo(true);
+                                    })
+                                )
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("PopupAddCustomer")
+
+<script>
+
+    function onPopupAddNewCustomerClicked() {
+        var modal = document.getElementById("popupAddCustomer");
+        modal.classList.add("show", "in");
+        modal.style.display = "block";
+    }
+
+</script>
