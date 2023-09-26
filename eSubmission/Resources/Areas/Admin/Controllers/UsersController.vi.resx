@@ -165,6 +165,9 @@
   <data name="Search" xml:space="preserve">
     <value>Tìm kiếm</value>
   </data>
+  <data name="test" xml:space="preserve">
+    <value>abc</value>
+  </data>
   <data name="UserGroupLabel" xml:space="preserve">
     <value>Nhóm người dùng</value>
   </data>
